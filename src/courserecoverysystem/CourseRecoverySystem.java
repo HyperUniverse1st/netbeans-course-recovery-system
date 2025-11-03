@@ -8,10 +8,12 @@ package courserecoverysystem;
  *
  * @author seany
  */
+
 import java.awt.*;
 import javax.swing.*;
-import uiElements.SidebarPanel;
+import courserecoverysystem.uiElements.SidebarPanel;
 import view.Test;
+import courserecoverysystem.controller.SidebarHandler;
 
 public class CourseRecoverySystem {
 
@@ -19,19 +21,25 @@ public class CourseRecoverySystem {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Course Recovery System");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(1000, 600);
-            frame.setLocationRelativeTo(null);
+            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             frame.setLayout(new BorderLayout());
 
-            SidebarPanel sidebar = new SidebarPanel();
-            sidebar.setPreferredSize(new Dimension(250, 0)); // fixed width
-            frame.add(sidebar, BorderLayout.WEST);
+            SidebarHandler handler = new SidebarHandler();
 
-            Test test = new Test();
-            frame.add(test, BorderLayout.CENTER);
+            String buttonConfig = """
+                Fun1|15|#5c6872|#ffffff|null|Fun1,
+                Fun2|15|#5c6872|#ffffff|null|Fun2,
+                Fun3|15|#5c6872|#ffffff|null|Fun3,
+                Fun4|15|#5c6872|#ffffff|null|Fun4
+                """;
+
+            SidebarPanel sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);
+            sidebar.setPreferredSize(new Dimension(250, 0));
+
+            frame.add(sidebar, BorderLayout.WEST);
+            frame.add(new Test(), BorderLayout.CENTER);
 
             frame.setVisible(true);
         });
     }
 }
-
