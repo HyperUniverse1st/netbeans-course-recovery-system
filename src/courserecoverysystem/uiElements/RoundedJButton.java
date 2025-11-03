@@ -2,23 +2,26 @@ package courserecoverysystem.uiElements;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 
 public class RoundedJButton extends JButton {
-    private int cornerRadius;
+    private int cornerRadius = 15; // default radius
 
+    // Default constructor for NetBeans GUI Builder
+    public RoundedJButton() {
+        super();
+        // Use a sensible default for designer
+        this.cornerRadius = 15;
+        initButton(Color.LIGHT_GRAY, Color.BLACK);
+        setOpaque(false);
+    }
+
+    // Your existing constructors
     public RoundedJButton(String label, int radius, Color background, Color foreground, Icon icon) {
         super(label, icon);
         this.cornerRadius = radius;
-
-        setContentAreaFilled(false);
-        setFocusPainted(false);
-        setBorderPainted(false);
-        setOpaque(false);
         initButton(background, foreground);
         setBackground(background);
         setForeground(foreground);
-
         setHorizontalAlignment(SwingConstants.LEFT);
         setIconTextGap(10);
     }
@@ -26,7 +29,7 @@ public class RoundedJButton extends JButton {
     public RoundedJButton(String label, int radius, Color background, Color foreground) {
         this(label, radius, background, foreground, null);
     }
-    
+
     public RoundedJButton(String label, int radius, Color background, Color foreground, Icon icon, int width, int height) {
         super(label, icon);
         this.cornerRadius = radius;
@@ -36,6 +39,16 @@ public class RoundedJButton extends JButton {
         setMinimumSize(new Dimension(width, height));
     }
 
+    // Getter/setter for designer property
+    public int getCornerRadius() {
+        return cornerRadius;
+    }
+
+    public void setCornerRadius(int cornerRadius) {
+        this.cornerRadius = cornerRadius;
+        repaint();
+    }
+
     private void initButton(Color background, Color foreground) {
         setContentAreaFilled(false);
         setFocusPainted(false);
@@ -43,20 +56,14 @@ public class RoundedJButton extends JButton {
         setOpaque(false);
         setBackground(background);
         setForeground(foreground);
-        setHorizontalAlignment(SwingConstants.LEFT);
-        setIconTextGap(10);
-        
+
         if (getIcon() == null) {
             setHorizontalAlignment(SwingConstants.CENTER);
         } else {
             setHorizontalAlignment(SwingConstants.LEFT);
         }
-    setVerticalAlignment(SwingConstants.CENTER);
-    }
-    
-    public void setCornerRadius(int radius) {
-        this.cornerRadius = radius;
-        repaint();
+        setIconTextGap(10);
+        setVerticalAlignment(SwingConstants.CENTER);
     }
 
     @Override

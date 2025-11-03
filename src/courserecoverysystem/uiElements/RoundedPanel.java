@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundedPanel extends JPanel {
-    private int cornerRadius;
+    private int cornerRadius = 15; // default value
+
+    public RoundedPanel() {
+        setOpaque(false);
+    }
 
     public RoundedPanel(int radius) {
         this.cornerRadius = radius;
@@ -15,6 +19,15 @@ public class RoundedPanel extends JPanel {
         this.cornerRadius = radius;
         setBackground(bgColor);
         setOpaque(false);
+    }
+
+    public int getCornerRadius() {
+        return cornerRadius;
+    }
+
+    public void setCornerRadius(int cornerRadius) {
+        this.cornerRadius = cornerRadius;
+        repaint();
     }
 
     @Override
