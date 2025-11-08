@@ -8,19 +8,28 @@ package courserecoverysystem.controller;
  *
  * @author seany
  */
+import java.awt.*;
+import javax.swing.*;
+
 public class SidebarHandler {
+
+    private final JPanel mainPanel;
+
+    public SidebarHandler(JPanel mainPanel) {
+        this.mainPanel = mainPanel;
+    }
 
     public void handle(String functionName) {
         System.out.println("Sidebar clicked: " + functionName);
 
         switch (functionName) {
             case "Fun1" -> btnFunction1();
-            default -> System.out.println("Unknown sidebar action: " + functionName); //maybe i might make this into error handling but i dont wanna T-T can someone else do it?
+            default -> System.out.println("Unknown sidebar action: " + functionName);
         }
     }
 
-    private void btnFunction1() { // here add it here as in all button functions for like all buttons
-        System.out.println("Fun1");
-        
+    private void btnFunction1() {
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel, "Test2");
     }
 }

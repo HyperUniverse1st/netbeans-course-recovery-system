@@ -17,7 +17,7 @@ import courserecoverysystem.data.FileData;
 
 public class FileService {
     String separator = "//|";
-    final private String[] student = {"column1", "column2"}; 
+    final private String[] user = {"column1", "column2"}; 
     //need to add all the headers for the file
     
     public List<String> dbHeaderSearch(String filename) { 
@@ -26,11 +26,16 @@ public class FileService {
         }
 
         switch (filename) {
-            case "student":
-                return Arrays.asList(student);
+            case "user":
+                return Arrays.asList(user);
             default:
                 return new ArrayList<>();
         }
+    }
+    
+    public int getHeaderIndex(String filename, String column) {
+        List<String> headers = dbHeaderSearch(filename);
+        return headers.indexOf(column);
     }
     
     
@@ -54,8 +59,7 @@ public class FileService {
         return header.size() == line.size();
     }    
     
-    
-    
+
     public String createLineString(List<String> values) {
         if (values == null || values.isEmpty()) {
             return "";
@@ -105,9 +109,7 @@ public class FileService {
     public List<String> retrieveOneMatchLine(String filename, String searchColumn, String value) {
 
         List<String> header = dbHeaderSearch(filename);
-
         int columnIndex = header.indexOf(searchColumn);
-
         if (columnIndex == -1) {
             return new ArrayList<>();
         }
@@ -117,7 +119,6 @@ public class FileService {
 
         for (String line : lines) {
             List<String> values = parseLine(line);
-
             if (lengthCheck(header, values) && values.get(columnIndex).equals(value)) {
                 return values;
             }
@@ -128,9 +129,7 @@ public class FileService {
     public List<String> retrieveAllMatchLine(String filename, String searchColumn, String value) {
 
         List<String> header = dbHeaderSearch(filename);
-
         int columnIndex = header.indexOf(searchColumn);
-
         if (columnIndex == -1) {
             return new ArrayList<>();
         }
@@ -141,7 +140,6 @@ public class FileService {
 
         for (String line : lines) {
             List<String> values = parseLine(line);
-
             if (lengthCheck(header, values) && values.get(columnIndex).equals(value)) {
                 matchedLines.add(line);
             }
@@ -156,6 +154,111 @@ public class FileService {
 
 
     
+    public void deleteOneMatchLine(String filename, String searchColumn, String value) {
+
+        List<String> header = dbHeaderSearch(filename);
+        int columnIndex = header.indexOf(searchColumn);
+        boolean deleted = false;
+        
+        if (columnIndex == -1) {
+            return;
+        }
+
+        FileData data = new FileData();
+        List<String> lines = data.fileRead(filename);
+        List<String> unmatchedLines = new ArrayList<>();
+
+        for (String line : lines) {
+            List<String> values = parseLine(line);
+            if (deleted) {
+                unmatchedLines.add(line);
+                continue;
+            }
+            if (lengthCheck(header, values) && values.get(columnIndex).equals(value)) {
+                deleted = true;
+                continue;
+            }
+            unmatchedLines.add(line);
+        }
+        data.fileOverrrideWrite(filename, createContentString(unmatchedLines));
+    }
+    
+
+    
+    public void deleteAllMatchLine(String filename, String searchColumn, String value) {
+
+        List<String> header = dbHeaderSearch(filename);
+        int columnIndex = header.indexOf(searchColumn);
+        if (columnIndex == -1) {
+            return;
+        }
+
+        FileData data = new FileData();
+        List<String> lines = data.fileRead(filename);
+        List<String> unmatchedLines = new ArrayList<>();
+
+        for (String line : lines) {
+            List<String> values = parseLine(line);
+            if (lengthCheck(header, values) && values.get(columnIndex).equals(value)) {
+                continue;
+            }
+            unmatchedLines.add(line);
+        }
+        data.fileOverrrideWrite(filename, createContentString(unmatchedLines));
+    }
+    
+
+    
+    public void editOneMatchLine(String filename, String searchColumn, String searchValue, String editColumn, String editValue) {
+        List<String> header = dbHeaderSearch(filename);
+        int searchColumnIndex = header.indexOf(searchColumn);
+        int editColumnIndex = header.indexOf(editColumn);
+        boolean edited = false;
+
+        if (searchColumnIndex == -1 || editColumnIndex == -1) {
+            return;
+        }
+        
+        FileData data = new FileData();
+        List<String> lines = data.fileRead(filename);
+        List<String> editedLines = new ArrayList<>();
+
+        for (String line : lines) {
+            List<String> values = parseLine(line);
+            if (lengthCheck(header, values) && values.get(searchColumnIndex).equals(searchValue) && !edited) {
+                values.set(editColumnIndex, editValue);
+                edited = true;
+            }
+            editedLines.add(line);
+        }
+        data.fileOverrrideWrite(filename, createContentString(editedLines));
+    }
+    
+    public void editAllMatchLine(String filename, String searchColumn, String searchValue, String editColumn, String editValue) {
+        List<String> header = dbHeaderSearch(filename);
+        int searchColumnIndex = header.indexOf(searchColumn);
+        int editColumnIndex = header.indexOf(editColumn);
+
+        if (searchColumnIndex == -1 || editColumnIndex == -1) {
+            return;
+        }
+        
+        FileData data = new FileData();
+        List<String> lines = data.fileRead(filename);
+        List<String> editedLines = new ArrayList<>();
+
+        for (String line : lines) {
+            List<String> values = parseLine(line);
+            if (lengthCheck(header, values) && values.get(searchColumnIndex).equals(searchValue)) {
+                values.set(editColumnIndex, editValue);
+            }
+            editedLines.add(line);
+        }
+        data.fileOverrrideWrite(filename, createContentString(editedLines));
+    }
+    
+    
+    
     public void writeAppend(String filename, String content) {
         FileData data = new FileData();
         data.fileAppendWrite(filename, content);
@@ -165,4 +268,6 @@ public class FileService {
         FileData data = new FileData();
         data.fileOverrrideWrite(filename, content);
     }
+    
+    
 }

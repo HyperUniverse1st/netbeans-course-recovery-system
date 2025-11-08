@@ -18,7 +18,7 @@ public class SidebarPanel extends JPanel {
         this.buttonClickListener = listener;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(new Color(0x5c6872));
+        setBackground(new Color(78, 118, 163));
 
     SidebarProfile profile = new SidebarProfile(
         "/resources/pfp/Luffy.png", // this is hard coded so if you want to know why it is luffy this is the reason

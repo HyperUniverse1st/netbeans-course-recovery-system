@@ -13,6 +13,7 @@ import java.awt.*;
 import javax.swing.*;
 import courserecoverysystem.uiElements.SidebarPanel;
 import view.Test;
+import courserecoverysystem.view.Test2;
 import courserecoverysystem.controller.SidebarHandler;
 
 public class CourseRecoverySystem {
@@ -23,8 +24,18 @@ public class CourseRecoverySystem {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             frame.setLayout(new BorderLayout());
+            
+            JPanel mainPanel = new JPanel(new CardLayout());
 
-            SidebarHandler handler = new SidebarHandler();
+            
+            Test testPage = new Test();
+            Test2 test2Page = new Test2();
+
+            mainPanel.add(testPage, "Test");
+            mainPanel.add(test2Page, "Test2");
+            
+
+            SidebarHandler handler = new SidebarHandler(mainPanel);
 
             String buttonConfig = """
                 Fun1|15|#5c6872|#ffffff|null|Fun1,
@@ -37,7 +48,7 @@ public class CourseRecoverySystem {
             sidebar.setPreferredSize(new Dimension(250, 0));
 
             frame.add(sidebar, BorderLayout.WEST);
-            frame.add(new Test(), BorderLayout.CENTER);
+            frame.add(mainPanel, BorderLayout.CENTER);
 
             frame.setVisible(true);
         });
