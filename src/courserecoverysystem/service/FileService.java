@@ -15,6 +15,34 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import courserecoverysystem.data.FileData;
 
+/*
+Here you need to know is 
+    int getHeaderIndex(String filename, String column) - this will just return the index of the header
+
+    String createLineString(List<String> values) - this just make array into a string with | inbetween
+
+    String createContentString(List<String> lines) - this will make things in an Arraylist to have /n inbetween each other
+
+    List<String> parseLine (String line) - does the opposite of createLineString(List<String> values)
+
+    Map<String, String> assignHeaderLine(String filename, List<String> values) - this is should be used during your retrieve so you can get the
+    value cleanly
+
+
+    THIS IS THE IMPORTANT ONES
+    List<String> retrieveOneMatchLine(String filename, String searchColumn, String value)
+    List<String> retrieveAllMatchLine(String filename, String searchColumn, String value)
+    List<String> retrieveAllLine(String filename)
+    void deleteOneMatchLine(String filename, String searchColumn, String value)
+    void deleteAllMatchLine(String filename, String searchColumn, String value)
+    void editOneMatchLine(String filename, String searchColumn, String searchValue, String editColumn, String editValue)
+    void editAllMatchLine(String filename, String searchColumn, String searchValue, String editColumn, String editValue)
+    void writeAppend(String filename, String content)
+    void writeOverride(String filename, String content)
+    
+    ykw just call me if you got any question - Yap
+*/
+
 public class FileService {
     String separator = "//|";
     final private String[] user = {"column1", "column2"}; 
@@ -269,5 +297,5 @@ public class FileService {
         data.fileOverrrideWrite(filename, content);
     }
     
-    
+    //TODO add string match
 }

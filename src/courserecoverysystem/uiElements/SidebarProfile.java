@@ -46,7 +46,7 @@ public class SidebarProfile extends JPanel {
         // Name label
         nameLabel = new JLabel(name);
         nameLabel.setForeground(fg);
-        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         textPanel.add(nameLabel);
 

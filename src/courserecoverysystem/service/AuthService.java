@@ -8,9 +8,17 @@ package courserecoverysystem.service;
  *
  * @author seany
  */
+
+import courserecoverysystem.model.User;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+/*
+Okay so here the method you need to know is
+    validateCredential if true then the user model will be init
+    resetpassword just reset password... ya that is it
+*/
+
 
 
 //TODO what is the file name btw?
@@ -18,8 +26,9 @@ public class AuthService {
     //TODO we really need to figure out the columns
     private Map<String, String> userMap = new HashMap<>();
     private String userFile = "user.txt";
-    private String usernameColumn = "username";
-    private String passwordColumn = "password";
+    final private String usernameColumn = "username";
+    final private String passwordColumn = "password";
+    private User currentUser;  //TODO you think we need this?
 
     public boolean validateCredentials(String username, String password) {
         FileService file = new FileService();
@@ -33,7 +42,17 @@ public class AuthService {
         int passwordColumnIndex = file.getHeaderIndex(userFile, passwordColumn);
 
         if (userData.get(passwordColumnIndex).equals(password)) {
+
             mapUserData(userFile, userData);
+
+            currentUser = new User(); //TODO add all user values 
+            currentUser.setName(userMap.get("name"));      
+            currentUser.setEmail(userMap.get("username"));  
+            currentUser.setRole(userMap.get("role"));       
+            currentUser.setPassword(password);              
+
+            User.setCurrentUser(currentUser); //TODO you think we need this?
+
             return true;
         }
         //TODO if password is not a match
@@ -48,6 +67,10 @@ public class AuthService {
     public Map<String, String> getUserMap() {
         return userMap;
     }
-    //TODO
-    //public resetPassword
+    
+    public boolean resetPassword(String username, String password) {
+        FileService file = new FileService();
+        file.editOneMatchLine(userFile, usernameColumn, username, passwordColumn, password);
+        return true; //TODO it is temp will always give true i will prob fix this later
+    }
 }

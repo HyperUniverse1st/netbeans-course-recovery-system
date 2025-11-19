@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+// j already know this so if you got any question just ask me - seanyap
+
 public class SidebarPanel extends JPanel {
     private Map<String, Runnable> functionMap = new HashMap<>();
     private int buttonWidth;
@@ -18,13 +20,13 @@ public class SidebarPanel extends JPanel {
         this.buttonClickListener = listener;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(new Color(78, 118, 163));
+        setBackground(new Color(78,118,163));
 
     SidebarProfile profile = new SidebarProfile(
-        "/resources/pfp/Luffy.png", // this is hard coded so if you want to know why it is luffy this is the reason
-        "Luffy Blah Blah",
-        "Pirate ig?",
-        new Color(0x5c6872),
+        "/resources/pfp/Logo.png", // added a logo for you guys! - jo
+        "Course Recovery System",
+        "Asia Pacific University",
+        new Color(78,118,163),
         Color.WHITE
     );
     
@@ -43,8 +45,8 @@ public class SidebarPanel extends JPanel {
             if (parts.length < 6) {
             System.out.println("Button has invalid call" + parts[0]);
             continue;
-            } // istg if you didnt look through here you should note that the calling has fail
-
+            } // istg if you didnt look through here you should note that the calling has fail // what does this sentence even mean?? - jo
+            // i said what i said
             String label = parts[0].trim();
             int radius = Integer.parseInt(parts[1].trim());
             Color bg = Color.decode(parts[2].trim());
@@ -66,7 +68,7 @@ public class SidebarPanel extends JPanel {
         btn.setMaximumSize(new Dimension(buttonWidth, buttonHeight));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setFont(new Font("Segoe UI", Font.BOLD, 30));
+        btn.setFont(new Font("Segoe UI", Font.BOLD, 25));
 
         btn.addActionListener(e -> {
             Runnable action = functionMap.get(functionName);

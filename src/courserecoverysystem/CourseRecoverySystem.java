@@ -9,11 +9,15 @@ package courserecoverysystem;
  * @author seany
  */
 
+/*
+need to change this so it will call login
+*/
+
 import java.awt.*;
 import javax.swing.*;
 import courserecoverysystem.uiElements.SidebarPanel;
-import view.Test;
-import courserecoverysystem.view.Test2;
+import courserecoverysystem.view.test.Test;
+import courserecoverysystem.view.test.Test2;
 import courserecoverysystem.controller.SidebarHandler;
 
 public class CourseRecoverySystem {
