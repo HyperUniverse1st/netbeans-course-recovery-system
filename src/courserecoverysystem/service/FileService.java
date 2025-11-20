@@ -93,7 +93,7 @@ public class FileService {
             return "";
         }
         
-        return String.join(separator, trim(values));
+        return String.join("|", trim(values));
     }
     
     
