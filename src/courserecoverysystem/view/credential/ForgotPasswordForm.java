@@ -107,9 +107,9 @@ public class ForgotPasswordForm extends javax.swing.JFrame {
         }
 
         String otpCode = otp.generateOTP(email);
-
+        
         boolean sent = NotificationService.sendOTPEmail(email, otpCode);
-
+        
         if (sent) {
             JOptionPane.showMessageDialog(this, "OTP has been sent to your email.");
             EmailTF.setEditable(false);
@@ -124,13 +124,14 @@ public class ForgotPasswordForm extends javax.swing.JFrame {
     String email   = EmailTF.getText().trim().toLowerCase();
     String userOtp = OtpTF.getText().trim();
 
+   
     if (email.isEmpty() || userOtp.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please enter both Email and OTP.");
         return;
     }
 
     boolean ok = otp.verifyOTP(email, userOtp);
-
+    
     if (ok) {
         otp.clearOTP(email);
         JOptionPane.showMessageDialog(this, "OTP correct. Continue to reset password.");

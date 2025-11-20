@@ -23,7 +23,7 @@ public class FileData {
     private String basePath;
     
     public FileData() {
-        this.basePath = "src/textDB/";
+        this.basePath = "src/courserecoverysystem/txtDB/";
     }
     
     public FileData(String basePath) {

@@ -25,14 +25,14 @@ Okay so here the method you need to know is
 public class AuthService {
     //TODO we really need to figure out the columns
     private Map<String, String> userMap = new HashMap<>();
-    private String userFile = "user.txt";
+    private String userFile = "user";
     final private String usernameColumn = "username";
     final private String passwordColumn = "password";
     private User currentUser;  //TODO you think we need this?
 
     public boolean validateCredentials(String username, String password) {
         FileService file = new FileService();
-
+        
         List<String> userData = file.retrieveOneMatchLine(userFile, usernameColumn, username);
         //TODO add whatever if username not found
         if (userData.isEmpty()) {
@@ -46,10 +46,10 @@ public class AuthService {
             mapUserData(userFile, userData);
 
             currentUser = new User(); //TODO add all user values 
-            currentUser.setName(userMap.get("name"));      
+//            currentUser.setName(userMap.get("name")); TODO you need to add this some time evenutally      
             currentUser.setEmail(userMap.get("username"));  
             currentUser.setRole(userMap.get("role"));       
-            currentUser.setPassword(password);              
+            currentUser.setPassword(userMap.get("password"));              
 
             User.setCurrentUser(currentUser); //TODO you think we need this?
 

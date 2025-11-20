@@ -44,9 +44,9 @@ Here you need to know is
 */
 
 public class FileService {
-    String separator = "//|";
-    final private String[] user = {"column1", "column2"}; 
-    //need to add all the headers for the file
+    String separator = "\\|";
+    final private String[] user = {"username", "password", "role"}; 
+    //TODO need to add all the headers for the file
     
     public List<String> dbHeaderSearch(String filename) { 
         if (filename.endsWith(".txt")) {
@@ -253,11 +253,12 @@ public class FileService {
 
         for (String line : lines) {
             List<String> values = parseLine(line);
+            
             if (lengthCheck(header, values) && values.get(searchColumnIndex).equals(searchValue) && !edited) {
                 values.set(editColumnIndex, editValue);
                 edited = true;
             }
-            editedLines.add(line);
+            editedLines.add(createLineString(values));
         }
         data.fileOverrrideWrite(filename, createContentString(editedLines));
     }
@@ -280,7 +281,7 @@ public class FileService {
             if (lengthCheck(header, values) && values.get(searchColumnIndex).equals(searchValue)) {
                 values.set(editColumnIndex, editValue);
             }
-            editedLines.add(line);
+            editedLines.add(createLineString(values));
         }
         data.fileOverrrideWrite(filename, createContentString(editedLines));
     }
