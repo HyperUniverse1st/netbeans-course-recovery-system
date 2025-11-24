@@ -6,6 +6,7 @@ import courserecoverysystem.uiElements.SidebarPanel;
 import courserecoverysystem.view.credential.LoginForm;
 import courserecoverysystem.view.lecturer.LecturerMain;
 import courserecoverysystem.view.lecturer.LecturerSchedule;
+import courserecoverysystem.view.lecturer.LecturerStudentDetails;
 import courserecoverysystem.view.lecturer.LecturerStudents;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -60,6 +61,7 @@ public class LoginScreen {
         // here, every page is considered a "card". we add all lecturer cards on to your hand.
         mainPanel.add(new LecturerMain(), "lhome");
         mainPanel.add(new LecturerStudents(), "lviewstudents");
+        mainPanel.add(new LecturerStudentDetails(), "lviewdetails");
         mainPanel.add(new LecturerSchedule(), "lviewschedule");
         
         // the sidebar is also a separate card. remove the old sidebar card if needed and add the new updated one.

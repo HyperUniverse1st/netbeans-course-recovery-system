@@ -250,8 +250,8 @@ public class LoginForm extends javax.swing.JFrame {
             User currentUser = User.getCurrentUser();  
             String role = currentUser.getRole().toLowerCase();
 
-            if (role.equals("2")) {
-                LoginScreen.SwapToLecturer(); // navigates over to Lecturer Pages
+            if (role.equals("2")) { // navigates to Lecturer Pages
+                LoginScreen.SwapToLecturer();
                 LoginScreen.showContent("lhome");
                 this.dispose(); 
             } else {

@@ -2,3 +2,4 @@ U00001|amylim12@gmail.com|admin123|1
 U00002|johnsimmons2@gmail.com|lect123|2
 U00003|seanyap40@gmail.com|12345678Aa!|3
 U00004|markleew089@gmail.com|student123|4
+U00005|susannahbv@gmail.com|student123|4

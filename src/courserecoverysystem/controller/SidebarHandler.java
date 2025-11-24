@@ -8,7 +8,6 @@ package courserecoverysystem.controller;
  *
  * @author seany
  */
-import courserecoverysystem.Lecturer;
 import courserecoverysystem.LoginScreen;
 import courserecoverysystem.view.lecturer.LecturerMain;
 import java.awt.BorderLayout;
