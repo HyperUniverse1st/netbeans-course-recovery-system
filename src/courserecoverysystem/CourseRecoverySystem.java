@@ -16,8 +16,8 @@ need to change this so it will call login
 import java.awt.*;
 import javax.swing.*;
 import courserecoverysystem.uiElements.SidebarPanel;
-import courserecoverysystem.view.test.Test;
-import courserecoverysystem.view.test.Test2;
+import courserecoverysystem.viewpublic.Test;
+import courserecoverysystem.viewpublic.Test2;
 import courserecoverysystem.controller.SidebarHandler;
 
 public class CourseRecoverySystem {

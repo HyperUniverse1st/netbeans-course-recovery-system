@@ -15,6 +15,7 @@ there should be only one user and as such you should use currentUser to get valu
 */
 
 public class User { //TODO please we really need the values for the user
+    private String uid;
     private String name;
     private String email;
     private String role;
@@ -25,13 +26,20 @@ public class User { //TODO please we really need the values for the user
     public User() {
     }
 
-    public User(String name, String email, String role, String password) {
+    public User(String uid, String name, String email, String role, String password) {
+        this.uid = uid;
         this.name = name;
         this.email = email;
         this.role = role;
         this.password = password;
     }
     
+    public String getUID() { //TODO these are the getters
+        return uid; 
+    }
+    public void setUID(String name) { 
+        this.uid = uid; 
+    }
     
     public String getName() { //TODO these are the getters
         return name; 

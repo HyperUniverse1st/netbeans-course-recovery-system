@@ -4,6 +4,7 @@
  */
 package courserecoverysystem.view.lecturer;
 
+import courserecoverysystem.LoginScreen;
 import java.awt.CardLayout;
 import java.awt.Container;
 import javax.swing.JPanel;
@@ -154,8 +155,7 @@ public class LecturerMain extends javax.swing.JPanel {
                 .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
-    private void navigateToStudents() {
-    // Get the parent container that uses CardLayout
+    private void navigateToStudents() { // specifically for the button on screen, unrelated to sidebar
     Container parent = this.getParent();
     if (parent instanceof JPanel) {
         CardLayout layout = (CardLayout) parent.getLayout();
@@ -163,7 +163,7 @@ public class LecturerMain extends javax.swing.JPanel {
     }
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        LoginScreen.logout();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnViewStudentsdbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentsdbActionPerformed

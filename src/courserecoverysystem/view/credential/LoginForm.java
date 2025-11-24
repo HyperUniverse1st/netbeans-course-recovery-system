@@ -4,6 +4,7 @@
  */
 package courserecoverysystem.view.credential;
 
+import courserecoverysystem.LoginScreen;
 import java.awt.Color;
 import courserecoverysystem.service.AuthService;
 import courserecoverysystem.model.User;
@@ -233,7 +234,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ForgotPwdLabelMouseExited
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
-            String email = EmailTF.getText();
+        String email = EmailTF.getText();
         String password = new String(PwdTF.getPassword());
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -245,18 +246,19 @@ public class LoginForm extends javax.swing.JFrame {
         boolean isValid = authService.validateCredentials(email, password);
 
         if (isValid) {
-            User currentUser = User.getCurrentUser(); 
-            JOptionPane.showMessageDialog(this,
-                "Login successful!\nWelcome " + currentUser.getName() + " (" + currentUser.getRole() + ")");
+            JOptionPane.showMessageDialog(this, "Login Successful!");
+            User currentUser = User.getCurrentUser();  
+            String role = currentUser.getRole().toLowerCase();
 
-            if (currentUser.getRole().equalsIgnoreCase("Admin")) {
-                new AdminForm().setVisible(true);
-                this.dispose();
+            if (role.equals("2")) {
+                LoginScreen.SwapToLecturer(); // navigates over to Lecturer Pages
+                LoginScreen.showContent("lhome");
+                this.dispose(); 
             } else {
-                //TODO this is really a todo T-T you can use the current user to check roles
+                JOptionPane.showMessageDialog(this, "Unsupported role: " + role);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid email or password!");
+            JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.");
         }
     }//GEN-LAST:event_LoginBtnActionPerformed
 
@@ -264,35 +266,6 @@ public class LoginForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginForm().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ package courserecoverysystem.controller;
  * @author seany
  */
 import courserecoverysystem.Lecturer;
+import courserecoverysystem.LoginScreen;
 import courserecoverysystem.view.lecturer.LecturerMain;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -35,9 +36,13 @@ public class SidebarHandler {
             case "lhome"-> btnLectHome();
             case "lviewstudents"-> btnLectStudents();
             case "lviewschedule"-> btnLectSchedule();
+            case "logout"-> btnLogOut();
         }
     }
-
+    private void btnLogOut() { 
+        LoginScreen.logout();
+    }
+    
     private void btnFunction1() { // here add it here as in all button functions for like all buttons
         CardLayout layout = (CardLayout) mainPanel.getLayout();
         layout.show(mainPanel,"Test");

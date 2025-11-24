@@ -18,9 +18,6 @@ Okay so here the method you need to know is
     validateCredential if true then the user model will be init
     resetpassword just reset password... ya that is it
 */
-
-
-
 //TODO what is the file name btw?
 public class AuthService {
     //TODO we really need to figure out the columns
@@ -47,6 +44,7 @@ public class AuthService {
 
             currentUser = new User(); //TODO add all user values 
 //            currentUser.setName(userMap.get("name")); TODO you need to add this some time evenutally      
+            currentUser.setUID(userMap.get("uid"));  
             currentUser.setEmail(userMap.get("username"));  
             currentUser.setRole(userMap.get("role"));       
             currentUser.setPassword(userMap.get("password"));              
