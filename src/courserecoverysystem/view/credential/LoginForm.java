@@ -97,6 +97,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(78, 118, 163));
+        setResizable(false);
 
         LoginLabel.setFont(new java.awt.Font("Segoe UI", 1, 40)); // NOI18N
         LoginLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
