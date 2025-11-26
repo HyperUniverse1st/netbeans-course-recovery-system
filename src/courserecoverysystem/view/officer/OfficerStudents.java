@@ -16,7 +16,8 @@ import javax.swing.table.DefaultTableModel;
 public class OfficerStudents extends javax.swing.JPanel {
     public OfficerStudents() {
         initComponents();
-        // studenttable for the jtable
+        // StudentTable for the jtable
+        // btnRefresh
     }
     
     

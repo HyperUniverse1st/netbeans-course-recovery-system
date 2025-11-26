@@ -73,7 +73,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="48" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Course Details"/>
+        <Property name="text" type="java.lang.String" value="COURSE REPORT"/>
       </Properties>
     </Component>
     <Container class="courserecoverysystem.uiElements.RoundedPanel" name="roundedPanel1">

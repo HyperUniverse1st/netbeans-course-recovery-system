@@ -361,9 +361,19 @@ public class OfficerStudentDetails extends javax.swing.JPanel {
 
         btnEditMilestone.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnEditMilestone.setText("Edit Milestone");
+        btnEditMilestone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditMilestoneActionPerformed(evt);
+            }
+        });
 
         btnRefresh.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -400,6 +410,14 @@ public class OfficerStudentDetails extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         SwapToStudents();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnEditMilestoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditMilestoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditMilestoneActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void SwapToStudents() { 
         Container parent = this.getParent();

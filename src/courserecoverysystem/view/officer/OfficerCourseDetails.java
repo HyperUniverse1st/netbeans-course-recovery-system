@@ -46,7 +46,7 @@ public class OfficerCourseDetails extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1420, 820));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel1.setText("Course Details");
+        jLabel1.setText("COURSE DETAILS");
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfp/back.png"))); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {

@@ -19,7 +19,6 @@ public class LecturerStudents extends javax.swing.JPanel {
     public LecturerStudents() {
         initComponents();
         // StudentTable for the jtable
-        // btnStudentDetails
         // btnRefresh
     }
     

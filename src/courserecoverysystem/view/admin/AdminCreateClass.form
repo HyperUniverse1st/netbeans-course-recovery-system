@@ -110,9 +110,9 @@
                               <Component id="jLabel4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="comboSubject" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="comboTime" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="comboSubject" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="btnBack2" min="-2" max="-2" attributes="0"/>

@@ -17,6 +17,7 @@ public class OfficerCourses extends javax.swing.JPanel {
     public OfficerCourses() {
         initComponents();
         // CourseTable for the jtable
+        // btnRefresh
     }
     
     
