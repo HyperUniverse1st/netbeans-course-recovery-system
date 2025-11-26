@@ -1,13 +1,14 @@
-package courserecoverysystem.view.lecturer;
+package courserecoverysystem.view.student;
 
+import courserecoverysystem.view.lecturer.*;
 import courserecoverysystem.LoginScreen;
 import java.awt.CardLayout;
 import java.awt.Container;
 import javax.swing.JPanel;
 
 
-public class LecturerMain extends javax.swing.JPanel {
-    public LecturerMain() {
+public class StudentMain extends javax.swing.JPanel {
+    public StudentMain() {
         // lblName for the welcome !! DONT FORGET THIS
         initComponents();
     }
@@ -23,7 +24,7 @@ public class LecturerMain extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         label5 = new java.awt.Label();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
-        btnViewStudentsdb = new javax.swing.JButton();
+        btnViewCourse = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(78, 118, 163));
@@ -73,22 +74,22 @@ public class LecturerMain extends javax.swing.JPanel {
         label5.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         label5.setText("Welcome,");
 
-        btnViewStudentsdb.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnViewStudentsdb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfp/studentlogo.png"))); // NOI18N
-        btnViewStudentsdb.setText("View Students");
-        btnViewStudentsdb.setAutoscrolls(true);
-        btnViewStudentsdb.setContentAreaFilled(true);
-        btnViewStudentsdb.setFocusPainted(false);
-        btnViewStudentsdb.setBorderPainted(false);
-        btnViewStudentsdb.setHideActionText(true);
-        btnViewStudentsdb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnViewStudentsdb.setIconTextGap(20);
-        btnViewStudentsdb.setMargin(new java.awt.Insets(2, 35, 3, 14));
-        btnViewStudentsdb.setName(""); // NOI18N
-        btnViewStudentsdb.setOpaque(true);
-        btnViewStudentsdb.addActionListener(new java.awt.event.ActionListener() {
+        btnViewCourse.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnViewCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfp/CourseLogo.png"))); // NOI18N
+        btnViewCourse.setText("View Course");
+        btnViewCourse.setAutoscrolls(true);
+        btnViewCourse.setContentAreaFilled(true);
+        btnViewCourse.setFocusPainted(false);
+        btnViewCourse.setBorderPainted(false);
+        btnViewCourse.setHideActionText(true);
+        btnViewCourse.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnViewCourse.setIconTextGap(20);
+        btnViewCourse.setMargin(new java.awt.Insets(2, 35, 3, 14));
+        btnViewCourse.setName(""); // NOI18N
+        btnViewCourse.setOpaque(true);
+        btnViewCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewStudentsdbActionPerformed(evt);
+                btnViewCourseActionPerformed(evt);
             }
         });
 
@@ -115,8 +116,8 @@ public class LecturerMain extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +127,7 @@ public class LecturerMain extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnViewStudentsdb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnViewCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(roundedPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
         );
@@ -147,26 +148,26 @@ public class LecturerMain extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnViewStudentsdb, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnViewCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
         );
     }// </editor-fold>//GEN-END:initComponents
-    private void SwapToStudents() { // specifically for the button on screen, unrelated to sidebar
+    private void SwapToCourses() { 
     Container parent = this.getParent();
     if (parent instanceof JPanel) {
         CardLayout layout = (CardLayout) parent.getLayout();
-        layout.show(parent, "lviewstudents");
+        layout.show(parent, "sviewcourses");
     }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         LoginScreen.logout();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnViewStudentsdbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentsdbActionPerformed
-        SwapToStudents();
-    }//GEN-LAST:event_btnViewStudentsdbActionPerformed
+    private void btnViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCourseActionPerformed
+        SwapToCourses();
+    }//GEN-LAST:event_btnViewCourseActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         Container parent = this.getParent();
@@ -175,11 +176,11 @@ public class LecturerMain extends javax.swing.JPanel {
             layout.show(parent, "userprofile");
         }
     }//GEN-LAST:event_btnProfileActionPerformed
-
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProfile;
-    private javax.swing.JButton btnViewStudentsdb;
+    private javax.swing.JButton btnViewCourse;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

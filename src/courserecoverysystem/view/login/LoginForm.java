@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package courserecoverysystem.view.credential;
+package courserecoverysystem.view.login;
 
 import courserecoverysystem.LoginScreen;
 import java.awt.Color;
@@ -265,6 +265,11 @@ public class LoginForm extends javax.swing.JFrame {
                 case "1" -> {
                     LoginScreen.SwapToAdmin();
                     LoginScreen.showContent("ahome");
+                    this.dispose();
+                }
+                case "4" -> {
+                    LoginScreen.SwapToStudent();
+                    LoginScreen.showContent("shome");
                     this.dispose();
                 }
                     

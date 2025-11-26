@@ -33,30 +33,45 @@ public class SidebarHandler {
             case "logout"-> btnLogOut();
             default -> JOptionPane.showMessageDialog(mainPanel, "Error! Button not formatted.");
             
-            // LECTURER STUFF
+            // LECTURER HANDLER
             case "LectTest" -> btnLect(); // i forgot what this was for but im not going to touch it
             case "lhome"-> btnLectHome();
             case "lviewstudents"-> btnLectStudents();
             case "lviewschedule"-> btnLectSchedule();
             
-            // OFFICER STUFF
+            // OFFICER HANDLER
             case "oviewstudents"-> btnOfficerStudents();
             case "ohome"-> btnOfficerHome();
             case "oanalytics"-> btnOfficerAnalytics();
             
-            // ADMIN STUFF
+            // ADMIN HANDLER
             case "ahome"-> btnAdminHome();
             case "aviewstudents"-> btnAdminStudents();
             case "aviewclasses"-> btnAdminClasses();
+            
+            // STUDENT HANDLER
+            case "shome"-> btnStudentHome();
+            case "sviewcourses"-> btnStudentCourse();
+            case "sviewschedule"-> btnStudentSchedule();
         }
     }
     private void btnLogOut() { 
         LoginScreen.logout();
     }
     
-    private void template() { 
+    private void btnStudentHome() { 
         CardLayout layout = (CardLayout) mainPanel.getLayout();
-        layout.show(mainPanel,"");
+        layout.show(mainPanel,"shome");
+    }
+    
+    private void btnStudentCourse() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"sviewcourses");
+    }
+    
+    private void btnStudentSchedule() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"sviewschedule");
     }
     
     // ADMIN STUFF
