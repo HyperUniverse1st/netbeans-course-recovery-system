@@ -30,23 +30,74 @@ public class SidebarHandler {
 
         switch (functionName) {
             case "Fun1" -> btnFunction1();
-            default -> System.out.println("Unknown sidebar action: " + functionName); //maybe i might make this into error handling but i dont wanna T-T can someone else do it?
-            case "LectTest" -> btnLect();
+            case "logout"-> btnLogOut();
+            default -> JOptionPane.showMessageDialog(mainPanel, "Error! Button not formatted.");
+            
+            // LECTURER STUFF
+            case "LectTest" -> btnLect(); // i forgot what this was for but im not going to touch it
             case "lhome"-> btnLectHome();
             case "lviewstudents"-> btnLectStudents();
             case "lviewschedule"-> btnLectSchedule();
-            case "logout"-> btnLogOut();
+            
+            // OFFICER STUFF
+            case "oviewstudents"-> btnOfficerStudents();
+            case "ohome"-> btnOfficerHome();
+            case "oanalytics"-> btnOfficerAnalytics();
+            
+            // ADMIN STUFF
+            case "ahome"-> btnAdminHome();
+            case "aviewstudents"-> btnAdminStudents();
+            case "aviewclasses"-> btnAdminClasses();
         }
     }
     private void btnLogOut() { 
         LoginScreen.logout();
     }
     
-    private void btnFunction1() { // here add it here as in all button functions for like all buttons
+    private void template() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"");
+    }
+    
+    // ADMIN STUFF
+    private void btnAdminHome() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"ahome");
+    }
+    
+    private void btnAdminStudents() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"aviewstudents");
+    }
+    
+    private void btnAdminClasses() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"aviewclasses");
+    }
+    
+    // OFFICER STUFF
+    private void btnOfficerStudents() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"oviewstudents");
+    }
+    
+    private void btnOfficerHome() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"ohome");
+    }
+    
+    private void btnOfficerAnalytics() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"oanalytics");
+    }
+    
+    private void btnFunction1() { 
         CardLayout layout = (CardLayout) mainPanel.getLayout();
         layout.show(mainPanel,"Test");
     }
     
+    
+    // LECTURER STUFF
     private void btnLect() { 
         System.out.println("Navigating to Lecturer Page...");
         CardLayout layout = (CardLayout) mainPanel.getLayout();

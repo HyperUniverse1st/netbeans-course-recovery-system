@@ -2,9 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package courserecoverysystem.view.lecturer;
-
-import courserecoverysystem.model.User;
+package courserecoverysystem.view.officer;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.io.BufferedReader;
@@ -15,13 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 
-public class LecturerStudents extends javax.swing.JPanel {
-    public LecturerStudents() {
+public class OfficerAnalytics extends javax.swing.JPanel {
+    public OfficerAnalytics() {
         initComponents();
-        // StudentTable for the jtable
-        // btnStudentDetails
         // btnRefresh
+        // btnViewReport
+        // i really have no idea what you wanted to do from the canva - jo
     }
+    
     
     
     @SuppressWarnings("unchecked")
@@ -30,9 +29,7 @@ public class LecturerStudents extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         roundedPanel1 = new courserecoverysystem.uiElements.RoundedPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        StudentTable = new javax.swing.JTable();
-        btnStudentDetails = new javax.swing.JButton();
+        btnViewReport = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(78, 118, 163));
@@ -43,23 +40,13 @@ public class LecturerStudents extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1420, 820));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel1.setText("STUDENT");
+        jLabel1.setText("Chart???");
 
-        StudentTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(StudentTable);
-
-        btnStudentDetails.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        btnStudentDetails.setText("Select Student");
-        btnStudentDetails.addActionListener(new java.awt.event.ActionListener() {
+        btnViewReport.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnViewReport.setText("View Report");
+        btnViewReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStudentDetailsActionPerformed(evt);
+                btnViewReportActionPerformed(evt);
             }
         });
 
@@ -77,26 +64,19 @@ public class LecturerStudents extends javax.swing.JPanel {
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(roundedPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(247, Short.MAX_VALUE))
-                    .addGroup(roundedPanel1Layout.createSequentialGroup()
-                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnStudentDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 574, Short.MAX_VALUE)
+                .addComponent(btnViewReport, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         roundedPanel1Layout.setVerticalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(528, 528, 528)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStudentDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewReport, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -107,31 +87,31 @@ public class LecturerStudents extends javax.swing.JPanel {
                 .addContainerGap(403, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void SwapToStudentDetails() { 
+    private void SwapToReports() { 
         Container parent = this.getParent();
         if (parent instanceof JPanel) {
             CardLayout layout = (CardLayout) parent.getLayout();
-            layout.show(parent, "lviewdetails");
+            layout.show(parent, "oreports");
         }
     }
-
-    private void btnStudentDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentDetailsActionPerformed
-        SwapToStudentDetails(); 
-    }//GEN-LAST:event_btnStudentDetailsActionPerformed
+    
+    private void btnViewReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewReportActionPerformed
+        SwapToReports();
+    }//GEN-LAST:event_btnViewReportActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
@@ -139,11 +119,9 @@ public class LecturerStudents extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable StudentTable;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton btnStudentDetails;
+    private javax.swing.JButton btnViewReport;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private courserecoverysystem.uiElements.RoundedPanel roundedPanel1;
     // End of variables declaration//GEN-END:variables
 }
