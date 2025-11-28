@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 public class SidebarPanel extends JPanel {
     private Map<String, Runnable> functionMap = new HashMap<>();
     private int buttonWidth;
-    private int buttonHeight = 125;
+    private int buttonHeight = 100;
     private Consumer<String> buttonClickListener;
 
     public SidebarPanel(String buttonConfig, int width, Consumer<String> listener) {

@@ -31,7 +31,6 @@ public class AdminClasses extends javax.swing.JPanel {
         ClassesTable = new javax.swing.JTable();
         btnCreateNewClass = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        btnViewClassrooms = new javax.swing.JButton();
         btnViewLecturers = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(78, 118, 163));
@@ -70,23 +69,6 @@ public class AdminClasses extends javax.swing.JPanel {
             }
         });
 
-        btnViewClassrooms.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnViewClassrooms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfp/ClassroomLogo.png"))); // NOI18N
-        btnViewClassrooms.setText("View Classrooms");
-        btnViewClassrooms.setAutoscrolls(true);
-        btnViewClassrooms.setFocusPainted(false);
-        btnViewClassrooms.setHideActionText(true);
-        btnViewClassrooms.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnViewClassrooms.setIconTextGap(20);
-        btnViewClassrooms.setMargin(new java.awt.Insets(2, 35, 3, 14));
-        btnViewClassrooms.setName(""); // NOI18N
-        btnViewClassrooms.setOpaque(true);
-        btnViewClassrooms.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewClassroomsActionPerformed(evt);
-            }
-        });
-
         btnViewLecturers.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnViewLecturers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfp/LecturerLogo.png"))); // NOI18N
         btnViewLecturers.setText("View Lecturers");
@@ -112,22 +94,18 @@ public class AdminClasses extends javax.swing.JPanel {
                 .addGap(82, 82, 82)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnViewLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(roundedPanel1Layout.createSequentialGroup()
-                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(222, 222, 222)
-                            .addComponent(btnCreateNewClass, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(btnViewClassrooms, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(roundedPanel1Layout.createSequentialGroup()
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(222, 222, 222)
+                        .addComponent(btnCreateNewClass, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         roundedPanel1Layout.setVerticalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewClassrooms, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnViewLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -191,10 +169,6 @@ public class AdminClasses extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnViewClassroomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewClassroomsActionPerformed
-        SwapToClassrooms();
-    }//GEN-LAST:event_btnViewClassroomsActionPerformed
-
     private void btnViewLecturersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewLecturersActionPerformed
         SwapToLecturers();
     }//GEN-LAST:event_btnViewLecturersActionPerformed
@@ -204,7 +178,6 @@ public class AdminClasses extends javax.swing.JPanel {
     private javax.swing.JTable ClassesTable;
     private javax.swing.JButton btnCreateNewClass;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton btnViewClassrooms;
     private javax.swing.JButton btnViewLecturers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

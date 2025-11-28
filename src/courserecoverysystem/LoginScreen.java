@@ -4,7 +4,6 @@ import courserecoverysystem.controller.SidebarHandler;
 import courserecoverysystem.model.User;
 import courserecoverysystem.uiElements.SidebarPanel;
 import courserecoverysystem.view.admin.AdminClasses;
-import courserecoverysystem.view.admin.AdminClassrooms;
 import courserecoverysystem.view.admin.AdminCreateClass;
 import courserecoverysystem.view.admin.AdminLecturers;
 import courserecoverysystem.view.admin.AdminMain;
@@ -139,7 +138,6 @@ public class LoginScreen {
         mainPanel.add(new AdminLecturers(), "alecturers");
         mainPanel.add(new AdminClasses(), "aviewclasses");
         mainPanel.add(new AdminCreateClass(), "acreateclass");
-        mainPanel.add(new AdminClassrooms(), "aviewclassrooms");
         mainPanel.add(new UserProfile(), "userprofile");
         
         if (sidebar != null) { 
@@ -151,6 +149,7 @@ public class LoginScreen {
             Home|12|#4E76A3|#ffffff|null|ahome,
             View Students|12|#4E76A3|#ffffff|null|aviewstudents,
             View Classes|12|#4E76A3|#ffffff|null|aviewclasses,
+            View Lecturers|12|#4E76A3|#ffffff|null|alecturers,
             Logout|12|#E05252|#ffffff|null|logout
             """;
         sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);

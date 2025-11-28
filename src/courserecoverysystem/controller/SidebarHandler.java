@@ -48,6 +48,7 @@ public class SidebarHandler {
             case "ahome"-> btnAdminHome();
             case "aviewstudents"-> btnAdminStudents();
             case "aviewclasses"-> btnAdminClasses();
+            case "alecturers" -> btnAdminLecturers();
             
             // STUDENT HANDLER
             case "shome"-> btnStudentHome();
@@ -88,6 +89,11 @@ public class SidebarHandler {
     private void btnAdminClasses() { 
         CardLayout layout = (CardLayout) mainPanel.getLayout();
         layout.show(mainPanel,"aviewclasses");
+    }
+    
+    private void btnAdminLecturers() { 
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel,"alecturers");
     }
     
     // OFFICER STUFF
