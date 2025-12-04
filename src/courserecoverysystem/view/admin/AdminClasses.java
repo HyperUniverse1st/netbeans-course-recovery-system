@@ -31,7 +31,6 @@ public class AdminClasses extends javax.swing.JPanel {
         ClassesTable = new javax.swing.JTable();
         btnCreateNewClass = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        btnViewLecturers = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(78, 118, 163));
         setDoubleBuffered(false);
@@ -69,23 +68,6 @@ public class AdminClasses extends javax.swing.JPanel {
             }
         });
 
-        btnViewLecturers.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnViewLecturers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfp/LecturerLogo.png"))); // NOI18N
-        btnViewLecturers.setText("View Lecturers");
-        btnViewLecturers.setAutoscrolls(true);
-        btnViewLecturers.setFocusPainted(false);
-        btnViewLecturers.setHideActionText(true);
-        btnViewLecturers.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnViewLecturers.setIconTextGap(20);
-        btnViewLecturers.setMargin(new java.awt.Insets(2, 35, 3, 14));
-        btnViewLecturers.setName(""); // NOI18N
-        btnViewLecturers.setOpaque(true);
-        btnViewLecturers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewLecturersActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout roundedPanel1Layout = new javax.swing.GroupLayout(roundedPanel1);
         roundedPanel1.setLayout(roundedPanel1Layout);
         roundedPanel1Layout.setHorizontalGroup(
@@ -93,7 +75,6 @@ public class AdminClasses extends javax.swing.JPanel {
             .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnViewLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(roundedPanel1Layout.createSequentialGroup()
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -104,10 +85,8 @@ public class AdminClasses extends javax.swing.JPanel {
         roundedPanel1Layout.setVerticalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(btnViewLecturers, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateNewClass, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +112,7 @@ public class AdminClasses extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -169,16 +148,11 @@ public class AdminClasses extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnViewLecturersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewLecturersActionPerformed
-        SwapToLecturers();
-    }//GEN-LAST:event_btnViewLecturersActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ClassesTable;
     private javax.swing.JButton btnCreateNewClass;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton btnViewLecturers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private courserecoverysystem.uiElements.RoundedPanel roundedPanel1;

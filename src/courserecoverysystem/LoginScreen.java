@@ -135,7 +135,7 @@ public class LoginScreen {
     public static void SwapToAdmin() {
         mainPanel.add(new AdminMain(), "ahome");
         mainPanel.add(new AdminStudents(), "aviewstudents");
-        mainPanel.add(new AdminLecturers(), "alecturers");
+        mainPanel.add(new AdminLecturers(), "aviewlecturers");
         mainPanel.add(new AdminClasses(), "aviewclasses");
         mainPanel.add(new AdminCreateClass(), "acreateclass");
         mainPanel.add(new UserProfile(), "userprofile");
@@ -149,7 +149,7 @@ public class LoginScreen {
             Home|12|#4E76A3|#ffffff|null|ahome,
             View Students|12|#4E76A3|#ffffff|null|aviewstudents,
             View Classes|12|#4E76A3|#ffffff|null|aviewclasses,
-            View Lecturers|12|#4E76A3|#ffffff|null|alecturers,
+            View Lecturers|12|#4E76A3|#ffffff|null|aviewlecturers,
             Logout|12|#E05252|#ffffff|null|logout
             """;
         sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);
