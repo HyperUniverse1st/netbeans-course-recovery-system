@@ -1,2 +1,10 @@
 L001|Ali Ahmad|ali@apu.edu.my|0123456789|Computer Science
-L002|Mary Tan|mary@apu.edu.my|0192223333|Mathematics
+L002|Mary Tan|mary@apu.edu.my|0192223333|Computer Science
+L003|Sean Ng|seanng@apu.edu.my|0134323456|Engineering
+L004|Sean Yap|seanyap@apu.edu.my|0167856854|Engineering
+L005|Emal|emal@apu.edu.my|0178675475|Philosophy
+L006|Jo|jo@apu.edu.my|0145647382|Philosophy
+L007|Eugene|eugene@apu.edu.my|0124567465|Mathematics
+L008|Iean|iean@apu.edu.my|0111145647|Mathematics
+L009|Chloe|chloe@apu.edu.my|0134564754|Physics
+L010|Ester|ester@apu.edu.my|0115675844|Physics
