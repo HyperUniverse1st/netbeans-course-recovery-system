@@ -3,21 +3,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package courserecoverysystem.view.admin;
+
+import courserecoverysystem.uiElements.TableUtils;
+import courserecoverysystem.model.Lecturer;
+import courserecoverysystem.service.LecturerService;
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
 public class AdminLecturers extends javax.swing.JPanel {
+    private final LecturerService lecturerService = new LecturerService();
+    private DefaultTableModel tableModel;
+    
     public AdminLecturers() {
         initComponents();
-        // LecturersTable for the jtable
-        // btnRefresh
+        setupLecturerTable(); //set column headers
+        TableUtils.centerAllColumns(LecturersTable);
+        TableUtils.starAutoRefresh(10_000, this::loadLecturerTable);
+    }
+    
+    private void setupLecturerTable(){
+        tableModel = new DefaultTableModel(
+            new Object[]{"Lecturer ID", "Name", "Email", "Subject", "Phone Number"}, 0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        LecturersTable.setModel(tableModel);
+        }
+    
+    private void loadLecturerTable() {
+        tableModel.setRowCount(0);
+        
+        List<Lecturer> lecturers = lecturerService.getAllLecturers();
+        
+        for (Lecturer lec : lecturers) {
+            tableModel.addRow(new Object[]{
+                lec.getId(),
+                lec.getName(),
+                lec.getEmail(),
+                lec.getMajor(),
+                lec.getPhone()
+            });
+            
+            TableUtils.centerAllColumns(LecturersTable);
+        }
     }
     
     private void SwapToClasses() { 
@@ -124,7 +160,7 @@ public class AdminLecturers extends javax.swing.JPanel {
 
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
+        loadLecturerTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

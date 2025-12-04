@@ -46,6 +46,7 @@ Here you need to know is
 public class FileService {
     String separator = "\\|";
     final private String[] user = {"uid","username", "password", "role"};
+    final private String[] student = {"studentID", "firstName", "lastName", "major", "year", "email","needRecovery","assigned"};
     //TODO need to add all the headers for the file
     
     public List<String> dbHeaderSearch(String filename) { 
@@ -56,6 +57,10 @@ public class FileService {
         switch (filename) {
             case "user":
                 return Arrays.asList(user);
+                
+            case "student":
+                return Arrays.asList(student);
+                
             default:
                 return new ArrayList<>();
         }

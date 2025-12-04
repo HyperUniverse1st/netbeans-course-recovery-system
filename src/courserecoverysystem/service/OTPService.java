@@ -18,8 +18,8 @@ This file was deleted and i want to kill myself dont touch or i will end myself
 
 public class OTPService {
     
-    private static final long validityDuration = 18000;
-    private static final Map<String, OTPEntry> otpMap = new ConcurrentHashMap<>();
+    private static final long validityDuration = 180000;
+    private static final Map<String, OTPEntry> otpMap = new ConcurrentHashMap<>();  
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private static final SecureRandom random = new SecureRandom();
 
@@ -30,8 +30,9 @@ public class OTPService {
         long now = System.currentTimeMillis();
         OTPEntry entry = new OTPEntry(otp, now);
         otpMap.put(email, entry);
+        System.out.println(otp); //debug usage
 
-        scheduler.schedule(() -> clearOTP(email), validityDuration, TimeUnit.MILLISECONDS);
+        scheduler.schedule(() -> clearOTP(email), validityDuration, TimeUnit.MILLISECONDS );
 
         return otp;
     }

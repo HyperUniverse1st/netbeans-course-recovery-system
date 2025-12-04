@@ -1,0 +1,2 @@
+L001|Ali Ahmad|ali@apu.edu.my|0123456789|Computer Science
+L002|Mary Tan|mary@apu.edu.my|0192223333|Mathematics

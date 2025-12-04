@@ -20,5 +20,4 @@ public class NotificationService {
         String body = "Your OTP code is: " + otp + "\nIt will expire in 3 minutes.";
         return EmailService.sendEmail(toEmail, subject, body);
     }
-    
 }

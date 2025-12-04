@@ -30,7 +30,7 @@ public class EmailService {
     private static final String SMTP_HOST = dotenv.get("SMTP_HOST");
     private static final String SMTP_PORT = dotenv.get("SMTP_PORT");
 
-    public static boolean sendEmail(String toEmail, String subject, String body) {
+    public static Boolean sendEmail(String toEmail, String subject, String body) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

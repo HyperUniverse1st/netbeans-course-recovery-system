@@ -14,7 +14,7 @@ package courserecoverysystem.model;
 there should be only one user and as such you should use currentUser to get values
 */
 
-public class User { //TODO please we really need the values for the user
+public class User {
     private String uid;
     private String name;
     private String email;
