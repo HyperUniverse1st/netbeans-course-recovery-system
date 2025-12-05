@@ -43,6 +43,19 @@ public class StudentService {
         return list;
     }
     
+    public List<Student> getFailedStudentsByMajor(String major){
+        List<Student> result = new ArrayList<>();
+        
+        for(Student s : getAllStudents()){
+            if(s.getMajor().equalsIgnoreCase(major)
+                    && s.isNeedRecovery()
+                    && !s.isAssigned()){
+                    result.add(s);
+                }
+            }
+        return result;
+    }
+    
     public List<Student> getUnassignedStudentsNeedingRecovery(){
         List<Student> all = getAllStudents();
         List<Student> result = new ArrayList<>();

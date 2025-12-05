@@ -23,9 +23,23 @@ public class Lecturer {
         this.major = major;
     }
     
+    public Lecturer(String line){
+        String[] p = line.split("\\|");
+        this.id = p[0];
+        this.name = p[1];
+        this.email = p[2];
+        this.phone = p[3];
+        this.major = p[4];
+    }
+    
     public String getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
     public String getPhone() { return phone; }
     public String getMajor() { return major; }
+    
+    @Override
+    public String toString(){
+        return name;
+    }
 }

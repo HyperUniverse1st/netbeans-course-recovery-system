@@ -5,8 +5,6 @@
 package courserecoverysystem.service;
 
 import courserecoverysystem.model.Lecturer;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -26,7 +24,7 @@ public class LecturerService {
 
         // 2. Convert each line into a Lecturer object
         for (String line : lines) {
-            if (line == null || line.trim().isEmpty()) {
+            if (line == null || line.isEmpty()) {
                 continue; // skip empty lines
             }
 
@@ -49,5 +47,32 @@ public class LecturerService {
 
         return result;
     }
+    
+    public List<String> getAllSubjects(){
+        List<String> subjects = new ArrayList<>();
+        
+        for(Lecturer lec : getAllLecturers()){
+            String subject = lec.getMajor();
+            
+            if(!subjects.contains(subject)){
+                subjects.add(subject);
+            }
+        }
+        
+        return subjects;
+    }
+    
+    public List<Lecturer> getLecturersByMajor(String major){
+        List<Lecturer> result = new ArrayList<>();
+        
+        for (Lecturer lec : getAllLecturers()){
+            if(lec.getMajor().equalsIgnoreCase(major)){
+                result.add(lec);
+            }
+        }
+        return result;
+    }
 }
+
+
 
