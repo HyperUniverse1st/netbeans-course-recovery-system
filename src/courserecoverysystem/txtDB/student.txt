@@ -1,0 +1,10 @@
+S001|Fiona|Smith|Computer Science|Senior|fiona.smith@university.edu|1|0
+S002|George|Wilson|Literature|Sophomore|george.wilson@university.edu|1|1
+S003|Ivan|Wilson|Mathematics|Senior|ivan.wilson@university.edu|0|0
+S004|Ivan|Chen|Philosophy|Senior|ivan.chen@university.edu|1|0
+S005|Bob|Smith|Statistics|Sophomore|bob.smith@university.edu|0|0
+S006|Quinn|Chen|Engineering|Freshman|quinn.chen@university.edu|1|0
+S007|Oscar|Smith|Philosophy|Sophomore|oscar.smith@university.edu|0|1
+S008|Bob|Chen|Engineering|Freshman|bob.chen@university.edu|1|0
+S009|Rachel|Davis|Physics|Junior|rachel.davis@university.edu|1|1
+S010|Charlie|Miller|Computer Science|Freshman|charlie.miller@university.edu|1|1
