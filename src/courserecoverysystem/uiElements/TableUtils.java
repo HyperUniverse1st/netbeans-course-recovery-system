@@ -30,7 +30,9 @@ public class TableUtils {
         
         //Apply to every column in table
         for (int i = 0; i < table.getColumnCount(); i++){
-            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            if(table.getColumnClass(i) != Boolean.class){
+                table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            }
         }
         
         //Center the header text in table

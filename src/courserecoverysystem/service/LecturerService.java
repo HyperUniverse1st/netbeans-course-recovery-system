@@ -16,12 +16,16 @@ import java.util.List;
 public class LecturerService {
 
     private final FileService fileService = new FileService();
-    private final String LECTURER_FILE = "lecturer";   // File in txtDB folder
+    // This should match your lecturer file in txtDB (lecturer.txt)
+    private final String LECTURER_FILE = "lecturer";
 
+    /**
+     * Read all lecturers from lecturer file and convert to Lecturer objects
+     */
     public List<Lecturer> getAllLecturers() {
         List<Lecturer> result = new ArrayList<>();
 
-        // 1. Read all lines from the file (FileService will call FileData for you)
+        // 1. Read all lines from the file
         List<String> lines = fileService.retrieveAllLine(LECTURER_FILE);
 
         // 2. Convert each line into a Lecturer object
@@ -35,13 +39,13 @@ public class LecturerService {
                 continue; // not enough data, skip
             }
 
-            // IMPORTANT: match the order with your lecturer.txt file
+            // Match the order with lecturer.txt: ID|Name|Email|Phone|Subject(Major)
             Lecturer lec = new Lecturer(
                     values.get(0).trim(), // id
                     values.get(1).trim(), // name
                     values.get(2).trim(), // email
                     values.get(3).trim(), // phone
-                    values.get(4).trim()  // major
+                    values.get(4).trim()  // major / subject
             );
 
             result.add(lec);
@@ -49,5 +53,43 @@ public class LecturerService {
 
         return result;
     }
-}
 
+    /**
+     * Get all unique subjects/majors from lecturers
+     * Used to populate Subject combo box
+     */
+    public List<String> getAllSubjects() {
+        List<String> subjects = new ArrayList<>();
+
+        for (Lecturer lec : getAllLecturers()) {
+            String subject = lec.getMajor();
+            if (subject == null || subject.trim().isEmpty()) {
+                continue;
+            }
+            // avoid duplicates
+            if (!subjects.contains(subject)) {
+                subjects.add(subject);
+            }
+        }
+
+        return subjects;
+    }
+
+    /**
+     * Get all lecturers who teach a specific major/subject
+     */
+    public List<Lecturer> getLecturersByMajor(String major) {
+        List<Lecturer> result = new ArrayList<>();
+        if (major == null) {
+            return result;
+        }
+
+        for (Lecturer lec : getAllLecturers()) {
+            if (major.equalsIgnoreCase(lec.getMajor())) {
+                result.add(lec);
+            }
+        }
+
+        return result;
+    }
+}
