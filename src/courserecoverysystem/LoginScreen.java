@@ -3,27 +3,11 @@ package courserecoverysystem;
 import courserecoverysystem.controller.SidebarHandler;
 import courserecoverysystem.model.User;
 import courserecoverysystem.uiElements.SidebarPanel;
-import courserecoverysystem.view.admin.AdminClasses;
-import courserecoverysystem.view.admin.AdminCreateClass;
-import courserecoverysystem.view.admin.AdminLecturers;
-import courserecoverysystem.view.admin.AdminMain;
-import courserecoverysystem.view.admin.AdminStudents;
+import courserecoverysystem.view.admin.*;
 import courserecoverysystem.view.login.LoginForm;
-import courserecoverysystem.view.lecturer.LecturerMain;
-import courserecoverysystem.view.lecturer.LecturerSchedule;
-import courserecoverysystem.view.lecturer.LecturerStudentDetails;
-import courserecoverysystem.view.lecturer.LecturerStudents;
-import courserecoverysystem.view.officer.OfficerAnalytics;
-import courserecoverysystem.view.officer.OfficerCourseDetails;
-import courserecoverysystem.view.officer.OfficerCourses;
-import courserecoverysystem.view.officer.OfficerMain;
-import courserecoverysystem.view.officer.OfficerStudentDetails;
-import courserecoverysystem.view.officer.OfficerStudents;
-import courserecoverysystem.view.officer.OfficerViewReport;
-import courserecoverysystem.view.student.StudentCourseDetails;
-import courserecoverysystem.view.student.StudentCourses;
-import courserecoverysystem.view.student.StudentMain;
-import courserecoverysystem.view.student.StudentSchedule;
+import courserecoverysystem.view.lecturer.*;
+import courserecoverysystem.view.officer.*;
+import courserecoverysystem.view.student.*;
 import courserecoverysystem.viewpublic.UserProfile;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -87,9 +71,9 @@ public class LoginScreen {
 
         SidebarHandler handler = new SidebarHandler(mainPanel);
         String buttonConfig = """
-            Home|12|#4E76A3|#ffffff|null|lhome,
-            View Students|12|#4E76A3|#ffffff|null|lviewstudents,
-            View Schedule|12|#4E76A3|#ffffff|null|lviewschedule,
+            Home|12|#4E76A3|#26323D|null|lhome,
+            Students|12|#4E76A3|#ffffff|null|lviewstudents,
+            Schedule|12|#4E76A3|#ffffff|null|lviewschedule,
             Logout|12|#E05252|#ffffff|null|logout
             """;
         sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);
@@ -118,9 +102,9 @@ public class LoginScreen {
 
         SidebarHandler handler = new SidebarHandler(mainPanel);
         String buttonConfig = """
-            Home|12|#4E76A3|#ffffff|null|ohome,
-            View Students|12|#4E76A3|#ffffff|null|oviewstudents,
-            View Analytics|12|#4E76A3|#ffffff|null|oanalytics,
+            Home|12|#4E76A3|#26323D|null|ohome,
+            Students|12|#4E76A3|#ffffff|null|oviewstudents,
+            Analytics|12|#4E76A3|#ffffff|null|oanalytics,
             Logout|12|#E05252|#ffffff|null|logout
             """;
         sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);
@@ -135,9 +119,11 @@ public class LoginScreen {
     public static void SwapToAdmin() {
         mainPanel.add(new AdminMain(), "ahome");
         mainPanel.add(new AdminStudents(), "aviewstudents");
+        mainPanel.add(new AdminStudentDetails(), "aviewstudentdetails");
         mainPanel.add(new AdminLecturers(), "aviewlecturers");
         mainPanel.add(new AdminClasses(), "aviewclasses");
         mainPanel.add(new AdminCreateClass(), "acreateclass");
+        mainPanel.add(new AdminCourses(), "aviewcourse");
         mainPanel.add(new UserProfile(), "userprofile");
         
         if (sidebar != null) { 
@@ -146,10 +132,10 @@ public class LoginScreen {
 
         SidebarHandler handler = new SidebarHandler(mainPanel);
         String buttonConfig = """
-            Home|12|#4E76A3|#ffffff|null|ahome,
-            View Students|12|#4E76A3|#ffffff|null|aviewstudents,
-            View Classes|12|#4E76A3|#ffffff|null|aviewclasses,
-            View Lecturers|12|#4E76A3|#ffffff|null|aviewlecturers,
+            Home|12|#4E76A3|#26323D|null|ahome,
+            Classes|12|#4E76A3|#ffffff|null|aviewclasses,
+            Students|12|#4E76A3|#ffffff|null|aviewstudents,
+            Lecturers|12|#4E76A3|#ffffff|null|aviewlecturers,
             Logout|12|#E05252|#ffffff|null|logout
             """;
         sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);
@@ -174,9 +160,9 @@ public class LoginScreen {
 
         SidebarHandler handler = new SidebarHandler(mainPanel);
         String buttonConfig = """
-            Home|12|#4E76A3|#ffffff|null|shome,
-            View Courses|12|#4E76A3|#ffffff|null|sviewcourses,
-            View Schedule|12|#4E76A3|#ffffff|null|sviewschedule,
+            Home|12|#4E76A3|#26323D|null|shome,
+            Courses|12|#4E76A3|#ffffff|null|sviewcourses,
+            Schedule|12|#4E76A3|#ffffff|null|sviewschedule,
             Logout|12|#E05252|#ffffff|null|logout
             """;
         sidebar = new SidebarPanel(buttonConfig, 300, handler::handle);
