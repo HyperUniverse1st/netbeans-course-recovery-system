@@ -51,7 +51,7 @@ public class User { //TODO please we really need the values for the user
     public String getUID() { //TODO these are the getters
         return uid; 
     }
-    public void setUID(String name) { 
+    public void setUID(String uid) { 
         this.uid = uid; 
     }
     

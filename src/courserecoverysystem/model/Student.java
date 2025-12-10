@@ -10,36 +10,34 @@ package courserecoverysystem.model;
  */
 public class Student extends User {
     private String studentID;
+    private String userID;
     private String firstName;
     private String lastName;
     private String major;
     private String year;
-    private String email;
-    private boolean needRecovery; // true = failed, need course recovery
-    private boolean assigned; // true = already assigned to a recover class
     
     public Student(
-            String studentID, 
+            String studentID,
+            String userID,
             String firstName, 
             String lastName,
             String major,
-            String year,
-            String email,
-            boolean needRecovery, boolean assigned) {
-        super(studentID, firstName + " " + lastName, email, "student", ""); 
+            String year) {
+        super(userID, firstName + " " + lastName, null, "student", null); 
         this.studentID = studentID;
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.major = major;
         this.year = year;
-        this.email = email;
-        this.needRecovery = needRecovery;
-        this.assigned = assigned;
     }
     
     public String getStudentID() { return studentID; }
     public void setStudentID(String studentID) { this.studentID = studentID; }
 
+    public String getUserID(){ return userID;}
+    public void setUserID(String userID){this.userID = userID;}
+    
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
@@ -52,12 +50,4 @@ public class Student extends User {
     public String getYear() { return year; }
     public void setYear(String year) { this.year = year; }
     
-    public String getEmail() { return email; } 
-    public void setEmail(String email) { this.email = email; }
-
-    public boolean isNeedRecovery() { return needRecovery; }
-    public void setNeedRecovery(boolean needRecovery) { this.needRecovery = needRecovery; }
-
-    public boolean isAssigned() { return assigned; }
-    public void setAssigned(boolean assigned) { this.assigned = assigned; }
 }

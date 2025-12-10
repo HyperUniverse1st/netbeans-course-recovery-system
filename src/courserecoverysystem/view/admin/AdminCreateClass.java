@@ -80,14 +80,19 @@ public class AdminCreateClass extends javax.swing.JPanel {
     
     private void loadStudentsForSubject(String subject){
         DefaultTableModel model = (DefaultTableModel) StudentTable.getModel();
-        model.setRowCount(0); //clear old rows
+        model.setRowCount(0);
         
-        List<Student> students = studentService.getFailedStudentsByMajor(subject);
+        List<Student> allNeedRecovery = studentService.getStudentsNeedRecovery();
         
-        for(Student s : students){
+        for (Student s : allNeedRecovery){
+            if(subject != null && !subject.startsWith("--")){
+                if(!subject.equalsIgnoreCase(s.getMajor())){
+                    continue;
+                }
+            }
+            
             String fullName = s.getFirstName() + " " + s.getLastName();
-            //column 0 = checkbox (Boolean), 1 = Student ID, 2 = Name
-            model.addRow(new Object[] {false, s.getStudentID(), fullName });
+            model.addRow(new Object[]{false, s.getStudentID(), fullName });
         }
     }
     
@@ -385,14 +390,11 @@ public class AdminCreateClass extends javax.swing.JPanel {
         // 4. Generate new class ID and save
         String classId = classService.getNextClassId();
         classService.saveClass(classId, subject, lecturerName, date, time, selectedStudentIds);
-
-        // 5. Mark these students as assigned in student.txt
-        studentService.markStudentsAssigned(selectedStudentIds);
-
-        // 6. Show success message
+        
+        // 5. Show success message
         JOptionPane.showMessageDialog(this, "Class " + classId + " created successfully.");
 
-        // 7. Reset the form back to default (subject/date/time to 'Select', table empty)
+        // 6. Reset the form back to default (subject/date/time to 'Select', table empty)
         resetForm();
     }//GEN-LAST:event_btnCreateActionPerformed
 

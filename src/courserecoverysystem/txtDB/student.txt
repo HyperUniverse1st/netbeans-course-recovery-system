@@ -1,100 +1,16 @@
-S001|Fiona|Smith|Computer Science|Senior|fiona.smith@university.edu|1|0
-S002|George|Wilson|Literature|Sophomore|george.wilson@university.edu|0|0
-S003|Ivan|Wilson|Mathematics|Senior|ivan.wilson@university.edu|1|1
-S004|Ivan|Chen|Philosophy|Senior|ivan.chen@university.edu|1|1
-S005|Bob|Smith|Statistics|Sophomore|bob.smith@university.edu|1|1
-S006|Quinn|Chen|Engineering|Freshman|quinn.chen@university.edu|1|0
-S007|Oscar|Smith|Philosophy|Sophomore|oscar.smith@university.edu|0|1
-S008|Bob|Chen|Engineering|Freshman|bob.chen@university.edu|1|0
-S009|Rachel|Davis|Physics|Junior|rachel.davis@university.edu|1|1
-S010|Charlie|Miller|Computer Science|Freshman|charlie.miller@university.edu|1|0
-S011|David|Harris|Computer Science|Senior|david.harris@university.edu|1|0
-S012|Emma|Johnson|Literature|Sophomore|emma.johnson@university.edu|1|0
-S013|Frank|Brown|Mathematics|Junior|frank.brown@university.edu|1|0
-S014|Grace|Lee|Philosophy|Freshman|grace.lee@university.edu|0|1
-S015|Henry|Walker|Statistics|Senior|henry.walker@university.edu|1|1
-S016|Isabella|Hall|Engineering|Junior|isabella.hall@university.edu|1|0
-S017|Jack|Young|Philosophy|Junior|jack.young@university.edu|1|1
-S018|Karen|Lewis|Mathematics|Freshman|karen.lewis@university.edu|0|0
-S019|Liam|Robinson|Physics|Sophomore|liam.robinson@university.edu|1|1
-S020|Mia|Clark|Computer Science|Junior|mia.clark@university.edu|1|0
-S021|Noah|Rodriguez|Engineering|Senior|noah.rodriguez@university.edu|1|0
-S022|Olivia|Martinez|Philosophy|Freshman|olivia.martinez@university.edu|0|1
-S023|Paul|Hernandez|Literature|Senior|paul.hernandez@university.edu|1|0
-S024|Queenie|Lopez|Mathematics|Sophomore|queenie.lopez@university.edu|0|1
-S025|Ryan|Gonzalez|Statistics|Junior|ryan.gonzalez@university.edu|0|0
-S026|Sophia|Wilson|Computer Science|Senior|sophia.wilson@university.edu|1|0
-S027|Thomas|Anderson|Engineering|Freshman|thomas.anderson@university.edu|1|0
-S028|Uma|Thomas|Philosophy|Junior|uma.thomas@university.edu|0|0
-S029|Victor|Taylor|Physics|Freshman|victor.taylor@university.edu|1|0
-S030|Wendy|Moore|Literature|Senior|wendy.moore@university.edu|0|1
-S031|Xavier|Jackson|Mathematics|Freshman|xavier.jackson@university.edu|1|0
-S032|Yasmin|Martin|Engineering|Junior|yasmin.martin@university.edu|1|1
-S033|Zach|Lee|Statistics|Senior|zach.lee@university.edu|0|1
-S034|Abby|Hill|Philosophy|Freshman|abby.hill@university.edu|1|0
-S035|Ben|Scott|Computer Science|Junior|ben.scott@university.edu|1|1
-S036|Cindy|Green|Literature|Sophomore|cindy.green@university.edu|0|1
-S037|Dylan|Adams|Physics|Senior|dylan.adams@university.edu|1|1
-S038|Ella|Baker|Statistics|Freshman|ella.baker@university.edu|0|0
-S039|Felix|King|Mathematics|Junior|felix.king@university.edu|0|1
-S040|Gina|Wright|Philosophy|Senior|gina.wright@university.edu|1|1
-S041|Howard|Lo|Engineering|Freshman|howard.lo@university.edu|1|1
-S042|Ivy|Young|Literature|Junior|ivy.young@university.edu|1|1
-S043|Jonas|Evans|Physics|Sophomore|jonas.evans@university.edu|0|0
-S044|Kylie|Moore|Computer Science|Freshman|kylie.moore@university.edu|1|1
-S045|Logan|Hill|Mathematics|Senior|logan.hill@university.edu|0|1
-S046|Megan|Ward|Philosophy|Junior|megan.ward@university.edu|1|1
-S047|Nathan|Diaz|Engineering|Senior|nathan.diaz@university.edu|0|0
-S048|Olga|Cruz|Statistics|Sophomore|olga.cruz@university.edu|1|0
-S049|Peter|Gray|Physics|Junior|peter.gray@university.edu|0|0
-S050|Queen|Reed|Literature|Freshman|queen.reed@university.edu|1|1
-S051|Ricky|Watson|Engineering|Junior|ricky.watson@university.edu|1|1
-S052|Sara|Brooks|Mathematics|Sophomore|sara.brooks@university.edu|0|0
-S053|Tim|Kelly|Computer Science|Senior|tim.kelly@university.edu|1|1
-S054|Ursula|Price|Philosophy|Junior|ursula.price@university.edu|0|1
-S055|Vince|Bell|Statistics|Freshman|vince.bell@university.edu|1|0
-S056|Willa|Cook|Engineering|Senior|willa.cook@university.edu|1|1
-S057|Xena|Murphy|Physics|Freshman|xena.murphy@university.edu|0|1
-S058|Yuri|Bailey|Literature|Junior|yuri.bailey@university.edu|1|1
-S059|Zane|Rivera|Mathematics|Freshman|zane.rivera@university.edu|0|0
-S060|Ava|Cooper|Computer Science|Junior|ava.cooper@university.edu|1|1
-S061|Blake|Richardson|Engineering|Freshman|blake.richardson@university.edu|0|1
-S062|Cara|Hughes|Philosophy|Senior|cara.hughes@university.edu|1|0
-S063|Derek|Perry|Statistics|Junior|derek.perry@university.edu|1|1
-S064|Eden|Powell|Physics|Senior|eden.powell@university.edu|0|0
-S065|Finn|Long|Literature|Freshman|finn.long@university.edu|1|1
-S066|Gia|Patterson|Mathematics|Sophomore|gia.patterson@university.edu|0|1
-S067|Harvey|Flores|Computer Science|Freshman|harvey.flores@university.edu|1|1
-S068|Isla|Nguyen|Engineering|Junior|isla.nguyen@university.edu|1|1
-S069|Jake|Henderson|Philosophy|Freshman|jake.henderson@university.edu|0|0
-S070|Kayla|Coleman|Statistics|Senior|kayla.coleman@university.edu|1|0
-S071|Landon|Jenkins|Physics|Junior|landon.jenkins@university.edu|1|0
-S072|Mila|Sullivan|Literature|Senior|mila.sullivan@university.edu|1|1
-S073|Nico|Foster|Mathematics|Junior|nico.foster@university.edu|0|1
-S074|Ophelia|Gibson|Philosophy|Sophomore|ophelia.gibson@university.edu|1|1
-S075|Parker|Stewart|Engineering|Freshman|parker.stewart@university.edu|1|1
-S076|Quincy|Holland|Computer Science|Junior|quincy.holland@university.edu|0|0
-S077|Rhea|Graham|Statistics|Freshman|rhea.graham@university.edu|1|1
-S078|Sam|Ford|Mathematics|Senior|sam.ford@university.edu|0|1
-S079|Tina|Mcdonald|Philosophy|Junior|tina.mcdonald@university.edu|1|1
-S080|Uriel|Arnold|Engineering|Sophomore|uriel.arnold@university.edu|1|1
-S081|Vera|Diaz|Physics|Freshman|vera.diaz@university.edu|0|0
-S082|Wyatt|Holmes|Literature|Junior|wyatt.holmes@university.edu|1|0
-S083|Ximena|Murray|Mathematics|Freshman|ximena.murray@university.edu|1|1
-S084|Yosef|Rhodes|Computer Science|Senior|yosef.rhodes@university.edu|0|1
-S085|Zara|Walsh|Philosophy|Sophomore|zara.walsh@university.edu|1|1
-S086|Aiden|Griffin|Engineering|Junior|aiden.griffin@university.edu|0|0
-S087|Bella|Weber|Statistics|Senior|bella.weber@university.edu|1|0
-S088|Caleb|Barnes|Physics|Junior|caleb.barnes@university.edu|0|1
-S089|Dina|Newman|Literature|Freshman|dina.newman@university.edu|1|1
-S090|Evan|Simon|Mathematics|Sophomore|evan.simon@university.edu|0|0
-S091|Faith|Pierce|Computer Science|Junior|faith.pierce@university.edu|1|1
-S092|Gavin|Stevens|Engineering|Senior|gavin.stevens@university.edu|1|1
-S093|Holly|Page|Philosophy|Freshman|holly.page@university.edu|0|1
-S094|Isaac|Hunter|Statistics|Sophomore|isaac.hunter@university.edu|1|1
-S095|Julia|Carson|Physics|Senior|julia.carson@university.edu|0|0
-S096|Kyle|Hampton|Literature|Junior|kyle.hampton@university.edu|1|0
-S097|Lila|Vargas|Mathematics|Freshman|lila.vargas@university.edu|0|1
-S098|Mason|Reyes|Computer Science|Senior|mason.reyes@university.edu|1|1
-S099|Nina|Warren|Engineering|Junior|nina.warren@university.edu|1|1
-S100|Hannah|Rivera|Biology|Senior|hannah.rivera@university.edu|1|0
+S001|U00005|Fiona|Smith|Computer Science|Senior
+S002|U00006|Charlie|Miller|Computer Science|Freshman
+S003|U00007|George|Wilson|Literature|Sophomore
+S004|U00008|Emma|Johnson|Literature|Sophomore
+S005|U00009|Ivan|Wilson|Mathematics|Senior
+S006|U00010|Frank|Brown|Mathematics|Junior
+S007|U00011|Ivan|Chen|Philosophy|Senior
+S008|U00012|Grace|Lee|Philosophy|Freshman
+S009|U00013|Bob|Smith|Statistics|Sophomore
+S010|U00014|Henry|Walker|Statistics|Senior
+S011|U00015|Quinn|Chen|Engineering|Freshman
+S012|U00016|Isabella|Hall|Engineering|Junior
+S013|U00017|Rachel|Davis|Physics|Junior
+S014|U00018|Dylan|Adams|Physics|Senior
+S015|U00019|Hannah|Rivera|Biology|Senior
+S016|U00020|Julia|Carson|Biology|Senior

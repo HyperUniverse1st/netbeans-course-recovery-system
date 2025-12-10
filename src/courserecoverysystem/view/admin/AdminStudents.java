@@ -6,21 +6,21 @@ package courserecoverysystem.view.admin;
 import courserecoverysystem.model.Student;
 import courserecoverysystem.service.StudentService;
 import courserecoverysystem.uiElements.TableUtils;
+import courserecoverysystem.service.RecoveryEnrollmentService;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
 
 
 public class AdminStudents extends javax.swing.JPanel {
     private final StudentService studentService = new StudentService();
+    private final RecoveryEnrollmentService recoveryService = new RecoveryEnrollmentService();
     private DefaultTableModel tableModel;
     
     public AdminStudents() {
         initComponents();
         setupTableModel();   // set columns for table
+        loadStudentTable();
         TableUtils.centerAllColumns(StudentTable); //center everything
         TableUtils.starAutoRefresh(10_000, this::loadStudentTable); // real-time refresh every 10s
     }
@@ -113,7 +113,7 @@ public class AdminStudents extends javax.swing.JPanel {
     //initialise the table model (columns, non-editable)
     private void setupTableModel(){
         tableModel = new DefaultTableModel(
-                new Object[]{"Student ID", "Name", "Major", "Year", "Email"}, 0
+                new Object[]{"Student ID","User ID", "First Name", "Last Name", "Major", "Year", "Assigned to Recovery?"}, 0
         ){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -128,21 +128,23 @@ public class AdminStudents extends javax.swing.JPanel {
     private void loadStudentTable(){
         tableModel.setRowCount(0); //clear old rows
         
-        List<Student> students = studentService.getUnassignedStudentsNeedingRecovery();
-        
+        List<Student> students = studentService.getAllStudents();
+        System.out.println("Debug: students returned from service = " + students.size());
         for (Student s : students) {
+            boolean assigned = recoveryService.hasAnyEnrollment(s.getStudentID());
             tableModel.addRow(new Object[]{
                 s.getStudentID(),
-                s.getFirstName() +" " + s.getLastName(),
+                s.getUserID(),
+                s.getFirstName(),
+                s.getLastName(),
                 s.getMajor(),
                 s.getYear(),
-                s.getEmail()
-                    
+                assigned ? "Yes" : "No"
             });
         }
         
         if (students.isEmpty()){
-            System.out.println("No student need recovery right now.");
+            System.out.println("No student found in student.txt file.");
         }
     }
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed

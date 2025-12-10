@@ -1,0 +1,10 @@
+C201|L001|Database Systems|4|Summer|69|31
+C202|L002|Chemistry|3|Spring|79|21
+C203|L003|History|2|Fall|52|48
+C204|L002|Algorithms|4|Fall|43|57
+C205|L004|Mathematics|4|Fall|53|47
+C206|L005|Operating Systems|4|Spring|71|29
+C207|L004|Chemistry|4|Summer|61|39
+C208|L001|Economics|4|Summer|47|53
+C209|L006|Operating Systems|2|Spring|64|36
+C210|L005|Database Systems|2|Summer|75|25
