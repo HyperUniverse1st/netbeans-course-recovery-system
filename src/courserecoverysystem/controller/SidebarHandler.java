@@ -9,7 +9,6 @@ package courserecoverysystem.controller;
  * @author seany
  */
 import courserecoverysystem.LoginScreen;
-import courserecoverysystem.view.lecturer.LecturerMain;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.*;

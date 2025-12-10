@@ -66,7 +66,7 @@ public class FileService {
             case "course":
                 return Arrays.asList(course);
                 
-            case "recovery_enrollment":
+            case "recoveryEnrollment":
                 return Arrays.asList(recoveryEnrollment);
                 
             default:

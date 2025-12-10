@@ -15,7 +15,7 @@ import javax.swing.JLabel;
  */
 public class TableUtils {
     private TableUtils(){}
-    public static void starAutoRefresh(int delayMs, Runnable reloadAction){
+    public static void startAutoRefresh(int delayMs, Runnable reloadAction){
         reloadAction.run();
         
         Timer timer = new Timer(delayMs, e -> reloadAction.run());

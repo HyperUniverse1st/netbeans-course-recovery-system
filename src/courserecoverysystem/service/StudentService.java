@@ -52,6 +52,7 @@ public class StudentService {
         List<Student> result = new ArrayList<>();
         
         for (Student s : allStudents){
+            System.out.println("Checking Students: " + s.getStudentID() + " {" + s.getFirstName() + " " + s.getLastName() +")");
             boolean hasFailed = gradeService.hasFailedCourse(s.getStudentID());
             boolean hasRecovery = recService.hasAnyEnrollment(s.getStudentID());
             
