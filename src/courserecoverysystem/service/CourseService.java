@@ -57,23 +57,49 @@ public class CourseService {
     }
     
     //CREATE: add new course
-        public boolean addCourse(Course course){
-            if(!validateWeights(course.getExamWeight(),course.getAssignmentWeight())){
-                System.out.println("Invalid weights: exam + assignment must = 100.");
-                return false;
-            }
-            
-            String line = String.join("|", 
-                    course.getCourseID(),
-                    course.getLecturerID(),
-                    course.getCourseName(),
-                    course.getCredit(),
-                    course.getSemester(),
-                    course.getExamWeight(),
-                    course.getAssignmentWeight()
-            );
-            
-            fileData.fileAppendWrite(FILE, line); //FILE = "course"
-            return true;
+    public boolean addCourse(Course course){
+        if(!validateWeights(course.getExamWeight(),course.getAssignmentWeight())){
+            System.out.println("Invalid weights: exam + assignment must = 100.");
+            return false;
         }
+
+        String line = String.join("|", 
+                course.getCourseID(),
+                course.getLecturerID(),
+                course.getCourseName(),
+                course.getCredit(),
+                course.getSemester(),
+                course.getExamWeight(),
+                course.getAssignmentWeight()
+        );
+
+        fileData.fileAppendWrite(FILE, line); //FILE = "course"
+        return true;
+    }
+    
+    public Course getCourseById(String courseId) {
+        List<String> cols = fileService.retrieveOneMatchLine("course", "courseID", courseId);
+        if (cols.isEmpty()) return null;
+
+        return new Course(
+                cols.get(0),                      // courseID
+                cols.get(1),                      // lecturerID
+                cols.get(2),                      // courseName
+                cols.get(3),                      // credit
+                cols.get(4),                      // semester
+                cols.get(5),                      // examWeight
+                cols.get(6)                       // assignmentWeight
+        );
+    }
+
+    public Course getCourseByID(String courseID) {
+        // If you already have getAllCourses(), reuse it
+        for (Course c : getAllCourses()) {
+            if (c.getCourseID().equals(courseID)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
 }

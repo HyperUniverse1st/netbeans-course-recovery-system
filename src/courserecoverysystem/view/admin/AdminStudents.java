@@ -10,6 +10,7 @@ import courserecoverysystem.service.RecoveryEnrollmentService;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 
@@ -31,7 +32,7 @@ public class AdminStudents extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        LabelStudent = new javax.swing.JLabel();
         roundedPanel1 = new courserecoverysystem.uiElements.RoundedPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         StudentTable = new javax.swing.JTable();
@@ -45,8 +46,8 @@ public class AdminStudents extends javax.swing.JPanel {
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1420, 820));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel1.setText("STUDENTS");
+        LabelStudent.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        LabelStudent.setText("STUDENTS");
 
         StudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,14 +80,16 @@ public class AdminStudents extends javax.swing.JPanel {
         roundedPanel1Layout.setHorizontalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundedPanel1Layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(622, 622, 622)
-                        .addComponent(btnStudentDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+                        .addComponent(btnStudentDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(roundedPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
         roundedPanel1Layout.setVerticalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +108,9 @@ public class AdminStudents extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(420, Short.MAX_VALUE)
+                .addContainerGap(334, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
         );
@@ -115,7 +118,7 @@ public class AdminStudents extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(97, 97, 97)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LabelStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(57, Short.MAX_VALUE))
@@ -125,15 +128,41 @@ public class AdminStudents extends javax.swing.JPanel {
     //initialise the table model (columns, non-editable)
     private void setupTableModel(){
         tableModel = new DefaultTableModel(
-                new Object[]{"Student ID","User ID", "First Name", "Last Name", "Major", "Year", "Assigned to Recovery?"}, 0
+                new Object[]{"Select","Student ID","User ID", "First Name", "Last Name", "Major", "Year", "Assigned to Recovery?"}, 0
         ){
             @Override
             public boolean isCellEditable(int row, int column){
-                return false; //user cannot edit cells
+                return column == 0; //user cannot edit cells
+            }
+            
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 0) {
+                    return Boolean.class; // Checkbox
+                }
+                return String.class;
             }
         };
         
-        StudentTable.setModel(tableModel);    
+        StudentTable.setModel(tableModel);   
+        
+        //Auto-uncheck all other rows when one is selected
+        tableModel.addTableModelListener(e -> {
+            int row = e.getFirstRow();
+            int col = e.getColumn();
+            
+            if(col == 0){ //Only respond to checkbox changes
+                Boolean value = (Boolean) tableModel.getValueAt(row, 0);
+                if(value != null && value){
+                    //uncheck all other rows
+                    for(int i = 0; i < tableModel.getRowCount(); i++){
+                        if(i != row){
+                            tableModel.setValueAt(false, i, 0);
+                        }
+                    }
+                }
+            }
+        });
     }
     
     //load data from StudentService into the table
@@ -142,9 +171,12 @@ public class AdminStudents extends javax.swing.JPanel {
         
         List<Student> students = studentService.getAllStudents();
         System.out.println("Debug: students returned from service = " + students.size());
+        
         for (Student s : students) {
             boolean assigned = recoveryService.hasAnyEnrollment(s.getStudentID());
+            System.out.println("Student: " + s.getStudentID() + " assigned?: " + assigned);
             tableModel.addRow(new Object[]{
+                false, //checkbox
                 s.getStudentID(),
                 s.getUserID(),
                 s.getFirstName(),
@@ -156,7 +188,7 @@ public class AdminStudents extends javax.swing.JPanel {
         }
         
         if (students.isEmpty()){
-            System.out.println("No student found in student.txt file.");
+            System.out.println("No student found.");
         }
     }
     
@@ -168,19 +200,80 @@ public class AdminStudents extends javax.swing.JPanel {
         }
     }
     
+    private JPanel findCardParent(){
+        Container c = this.getParent();
+        
+        while(c != null) {
+            if(c instanceof JPanel && c.getLayout() instanceof CardLayout){
+                return (JPanel) c; //found the card panel
+            }
+            c = c.getParent();
+        }
+        return null;
+    }
+    
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         loadStudentTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnStudentDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentDetailsActionPerformed
-        SwapToStudentDetails();
+        int selectedRow = -1;
+        int selectedCount = 0;
+        
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            Boolean checked = (Boolean) tableModel.getValueAt(i, 0);
+            if (checked != null && checked){
+                selectedCount++;
+                selectedRow = i;
+            }
+        }
+        
+        if(selectedCount == 0){
+            JOptionPane.showMessageDialog(this, "Please select a student first.");
+            return;
+        }
+        
+        if (selectedCount > 1){
+            JOptionPane.showMessageDialog(this,"You only can select ONE student.");
+            return;
+        }
+        
+        String studentID = (String) tableModel.getValueAt(selectedRow, 1);
+        System.out.println("Selected student ID = " + studentID);
+        
+        
+        JPanel cardPanel = findCardParent();
+        if (cardPanel == null) {
+            System.out.println("Error: Card Layout parent not found.");
+            return;
+        }
+        
+        AdminStudentDetails detailsPanel = null;
+        for(java.awt.Component comp : cardPanel.getComponents()){
+            if(comp instanceof AdminStudentDetails){
+                detailsPanel = (AdminStudentDetails) comp;
+                break;
+            }
+        }
+       
+        if (detailsPanel == null) {
+        System.out.println("ERROR: AdminStudentDetails panel NOT found inside mainPanel.");
+        return;
+    }
+
+    // Load student info
+    detailsPanel.loadStudent(studentID);
+
+    // Show details screen
+    CardLayout layout = (CardLayout) cardPanel.getLayout();
+    layout.show(cardPanel, "aviewstudentdetails");
     }//GEN-LAST:event_btnStudentDetailsActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelStudent;
     private javax.swing.JTable StudentTable;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnStudentDetails;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private courserecoverysystem.uiElements.RoundedPanel roundedPanel1;
     // End of variables declaration//GEN-END:variables

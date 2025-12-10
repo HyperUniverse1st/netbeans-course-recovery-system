@@ -1,9 +1,26 @@
 package courserecoverysystem.view.admin;
+import courserecoverysystem.model.Course;
+import courserecoverysystem.model.RecoveryEnrollment;
+import courserecoverysystem.model.Student;
+import courserecoverysystem.model.StudentGrade;
+import courserecoverysystem.service.CourseService;
+import courserecoverysystem.service.RecoveryEnrollmentService;
+import courserecoverysystem.service.StudentGradeService;
+import courserecoverysystem.service.StudentService;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class AdminStudentDetails extends javax.swing.JPanel {    
+    private final StudentService studentService = new StudentService();
+    private final StudentGradeService gradeService = new StudentGradeService();
+    private final CourseService courseService = new CourseService();
+    private final RecoveryEnrollmentService recoveryService = new RecoveryEnrollmentService();
+
+    private List<RecoveryEnrollment> currentEnrollments; // store for combobox switching
+    private String currentStudentID;
     public AdminStudentDetails() {
         initComponents();
         // btnEdit - edit recommendation given
@@ -23,6 +40,95 @@ public class AdminStudentDetails extends javax.swing.JPanel {
         // all of this is retrieved from the txt file and input into the labels as GUI
     }
     
+    public void loadStudent(String studentID){
+        this.currentStudentID = studentID;
+        
+        Student student = studentService .getStudentById(studentID);
+        if(student == null){
+            System.out.println("Error: student not found: " + studentID);
+            return;
+        }
+        
+        //basic info
+        txtName.setText(student.getFirstName() + " " + student.getLastName());
+        txtStudentID.setText(student.getStudentID());
+        txtMajor.setText(student.getMajor());
+        txtYear.setText(student.getYear());
+
+        txtName.setEditable(false);
+        txtStudentID.setEditable(false);
+        txtMajor.setEditable(false);
+        txtYear.setEditable(false);
+        
+        //load CGPA
+        double cgpa = studentService.computeCGPA(studentID);
+        txtCGPA.setText(String.format("%.2f", cgpa));
+        txtCGPA.setEditable(false);
+        
+        //load recovery enrollments
+        currentEnrollments = recoveryService.getEnrollmentsByStudent(studentID);
+        
+        cmbCourse.removeAllItems();
+        cmbRecovery.removeAllItems();
+        cmbStatus.removeAllItems();
+
+        if (currentEnrollments.isEmpty()) {
+            cmbCourse.addItem("No recovery courses");
+            txtGrade.setText("N/A");
+            return;
+        }
+        
+        //populate course names
+        for(RecoveryEnrollment e : currentEnrollments){
+            Course c = courseService.getCourseById(e.getCourseID());
+            if(c != null) {
+                cmbCourse.addItem(c.getCourseName());
+            }else {
+                cmbCourse.addItem(e.getCourseID());
+            }
+        }
+        
+        //when user select a course then will load details
+        cmbCourse.addActionListener(evt -> updateRecoveryDetails());
+        
+        //load first course by default
+        if(cmbCourse.getItemCount() > 0){
+            cmbCourse.setSelectedIndex(0);
+            updateRecoveryDetails();
+        }
+    }
+    
+    private void updateRecoveryDetails(){
+        int index = cmbCourse.getSelectedIndex();
+        if(index < 0 || currentEnrollments == null || index >= currentEnrollments.size()) return;
+        
+        RecoveryEnrollment enrollment = currentEnrollments.get(index);
+        
+        //load Recovery Type
+        cmbRecovery.removeAllItems();
+        cmbRecovery.addItem(enrollment.getType());
+        cmbRecovery.setEnabled(false);
+        
+        //load Status
+        cmbStatus.removeAllItems();
+        cmbStatus.addItem(enrollment.getStatus());
+        cmbStatus.setEnabled(false);
+        
+        //load Grade for this course
+        StudentGrade sg = gradeService.getStudentGrade(currentStudentID, enrollment.getCourseID());
+        Course course = courseService.getCourseById(enrollment.getCourseID());
+        
+        if(sg == null|| course == null){
+            txtGrade.setText("N/A");
+            return;
+        }
+        
+        double finalScore = gradeService.computeFinalScore(sg, course);
+        String letterGrade = gradeService.computeLetterGrade(finalScore);
+        
+        txtGrade.setText(letterGrade);
+        txtGrade.setEditable(false);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,18 +139,12 @@ public class AdminStudentDetails extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lblStudentName = new javax.swing.JLabel();
-        lblStudentGrade = new javax.swing.JLabel();
-        lblStudentGPA = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        lblStudentID = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lblMajor = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lblYear = new javax.swing.JLabel();
         cmbCourse = new javax.swing.JComboBox<>();
         cmbRecovery = new javax.swing.JComboBox<>();
         cmbStatus = new javax.swing.JComboBox<>();
@@ -52,6 +152,12 @@ public class AdminStudentDetails extends javax.swing.JPanel {
         btnCancel = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
+        txtStudentID = new javax.swing.JTextField();
+        txtGrade = new javax.swing.JTextField();
+        txtMajor = new javax.swing.JTextField();
+        txtCGPA = new javax.swing.JTextField();
+        txtYear = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(78, 118, 163));
         setDoubleBuffered(false);
@@ -70,13 +176,7 @@ public class AdminStudentDetails extends javax.swing.JPanel {
         jLabel3.setText("Course Selection");
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel4.setText("GPA");
-
-        lblStudentName.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        lblStudentGrade.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        lblStudentGPA.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel4.setText("CGPA");
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel5.setText("Recovery Type");
@@ -95,17 +195,11 @@ public class AdminStudentDetails extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel7.setText("ID");
 
-        lblStudentID.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel8.setText("Major");
 
-        lblMajor.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel9.setText("Year");
-
-        lblYear.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         cmbRecovery.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Exam", "Assignment", "Both" }));
 
@@ -143,6 +237,24 @@ public class AdminStudentDetails extends javax.swing.JPanel {
             }
         });
 
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
+        txtCGPA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCGPAActionPerformed(evt);
+            }
+        });
+
+        txtYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtYearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout roundedPanel1Layout = new javax.swing.GroupLayout(roundedPanel1);
         roundedPanel1.setLayout(roundedPanel1Layout);
         roundedPanel1Layout.setHorizontalGroup(
@@ -150,32 +262,37 @@ public class AdminStudentDetails extends javax.swing.JPanel {
             .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(btnBack)
-                .addGap(82, 82, 82)
+                .addGap(122, 122, 122)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(roundedPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblStudentGrade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblMajor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
-                    .addComponent(cmbRecovery, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtMajor, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(txtGrade)))
+                    .addComponent(cmbRecovery, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStudentGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 110, Short.MAX_VALUE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtYear, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                        .addComponent(txtCGPA)))
+                .addGap(0, 74, Short.MAX_VALUE))
             .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,32 +312,33 @@ public class AdminStudentDetails extends javax.swing.JPanel {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBack))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundedPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(roundedPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblStudentGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(roundedPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblStudentGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43)
                         .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(roundedPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(roundedPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundedPanel1Layout.createSequentialGroup()
@@ -248,11 +366,11 @@ public class AdminStudentDetails extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(449, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                .addGap(382, 382, 382))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +400,14 @@ public class AdminStudentDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // btnSave
+        String studentID = txtStudentID.getText();
+        String courseID = (String) cmbCourse.getSelectedItem();
+        
+        int attempts = recoveryService.checkAttemptNum(studentID, courseID);
+        
+        if(attempts >= 3){
+            JOptionPane.showMessageDialog(this, "This student has already attempted recovery for this course " + attempts + " times.\nNo more attempts allowed.", "Maximum Attempts Reached", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -292,6 +417,18 @@ public class AdminStudentDetails extends javax.swing.JPanel {
     private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbStatusActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
+    private void txtCGPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCGPAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCGPAActionPerformed
+
+    private void txtYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtYearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -312,12 +449,12 @@ public class AdminStudentDetails extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lblMajor;
-    private javax.swing.JLabel lblStudentGPA;
-    private javax.swing.JLabel lblStudentGrade;
-    private javax.swing.JLabel lblStudentID;
-    private javax.swing.JLabel lblStudentName;
-    private javax.swing.JLabel lblYear;
     private courserecoverysystem.uiElements.RoundedPanel roundedPanel1;
+    private javax.swing.JTextField txtCGPA;
+    private javax.swing.JTextField txtGrade;
+    private javax.swing.JTextField txtMajor;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtStudentID;
+    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

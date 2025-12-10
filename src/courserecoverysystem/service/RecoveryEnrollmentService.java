@@ -53,4 +53,42 @@ public class RecoveryEnrollmentService {
         }
         return false;
     }
+    
+    public List<RecoveryEnrollment> getEnrollmentsByStudent(String studentId) {
+        List<String> rows = fileService.retrieveAllMatchLine("recoveryEnrollment", "studentID", studentId);
+        List<RecoveryEnrollment> results = new ArrayList<>();
+
+        for (String row : rows) {
+            List<String> cols = FileData.parseLine(row);
+
+            results.add(new RecoveryEnrollment(
+                    cols.get(0), // enrollment ID
+                    cols.get(1), // student ID
+                    cols.get(2), // course ID
+                    cols.get(3), // recovery type
+                    cols.get(4)  // status
+            ));
+        }
+        return results;
+    }
+
+    public int checkAttemptNum(String studentID, String courseID){
+        int count = 0;
+        
+        List<String> lines = fileData.fileRead(FILE);
+        for(String line : lines){
+            if(line == null || line.trim().isEmpty()) continue;
+            
+            List<String> values = fileService.parseLine(line);
+            Map<String, String> map = fileService.assignHeaderLine(FILE, values);
+            
+            String sId = map.get("studentID");
+            String cId = map.get("courseID");
+            
+            if(studentID.equals(sId) && courseID.equals(cId)){
+                count++;
+            }
+        }
+        return count;
+    }
 }

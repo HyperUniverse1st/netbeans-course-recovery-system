@@ -1,3 +1,6 @@
 EN001|S001|C201|Reassessment|In Progress
-EN002|S003|C201|Resit Exam|Completed
+EN004|S002|C204|Resit Assignment|In Progress
+EN006|S002|C201|Resit Exam|Completed
+EN002|S003|C206|Resit Exam|Completed
+EN005|S004|C205|Both|In Progress
 EN003|S005|C202|Reassessment|Planned

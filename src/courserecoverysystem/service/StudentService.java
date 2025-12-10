@@ -6,6 +6,9 @@ package courserecoverysystem.service;
 
 import courserecoverysystem.model.Student;
 import courserecoverysystem.data.FileData;
+import courserecoverysystem.model.Course;
+import courserecoverysystem.model.StudentGrade;
+import courserecoverysystem.service.StudentGradeService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ public class StudentService {
     private static final String FILE = "student";
     private final FileService fileService = new FileService();
     private final FileData fileData = new FileData();
+    private final StudentGradeService gradeService = new StudentGradeService();
     
     public List<Student> getAllStudents(){
         List<Student> list = new ArrayList<>();
@@ -44,6 +48,15 @@ public class StudentService {
         return list;
     }
 
+    public Student getStudentById(String studentId){
+        for (Student s : getAllStudents()){
+            if(studentId.equals(s.getStudentID())){
+                return s; //found it
+            }
+        }
+        return null;
+    }
+    
     public List<Student> getStudentsNeedRecovery(){
         StudentGradeService gradeService = new StudentGradeService();
         RecoveryEnrollmentService recService = new RecoveryEnrollmentService();
@@ -62,4 +75,57 @@ public class StudentService {
         }
         return result;
     }
+    
+    public StudentGrade getStudentGrade(String studentId, String courseId){
+        List<StudentGrade> grades = gradeService.getGradesByStudent(studentId);
+        for(StudentGrade g : grades){
+            if(g.getCourseID().equals(courseId)){
+                return g;
+            }
+        }
+        return null;
+    }
+    
+    // Calculate CGPA for one student based on studentGrade.txt + course.txt
+    public double computeCGPA(String studentId) {
+        CourseService courseService = new CourseService();
+
+        List<StudentGrade> grades = gradeService.getGradesByStudent(studentId);
+        if (grades.isEmpty()) return 0.0;
+
+        double totalQualityPoints = 0.0;
+        double totalCredits = 0.0;
+
+        for (StudentGrade sg : grades) {
+            Course c = courseService.getCourseById(sg.getCourseID());
+            if (c == null) continue;
+
+            int credit;
+            try {
+                credit = Integer.parseInt(c.getCredit());  // credit stored as String
+            } catch (NumberFormatException ex) {
+                continue;
+            }
+
+            double finalScore = gradeService.computeFinalScore(sg, c);
+            double gradePoint = convertToGradePoint(finalScore);
+
+            totalQualityPoints += gradePoint * credit;
+            totalCredits += credit;
+        }
+
+        if (totalCredits == 0.0) return 0.0;
+        return totalQualityPoints / totalCredits;
+    }
+
+    // helper: numeric score → grade point
+    private double convertToGradePoint(double score) {
+        if (score >= 85) return 4.0;
+        if (score >= 70) return 3.0;
+        if (score >= 55) return 2.0;
+        if (score >= 40) return 1.0;
+        return 0.0;
+    }
+
+    
 }

@@ -47,8 +47,10 @@ public class FileService {
     String separator = "\\|";
     final private String[] user = {"uid","username", "password", "role"};
     final private String[] student = {"studentID", "userID", "firstName", "lastName", "major", "year"};
-    final private String[] course = {"couseID", "lecturerID", "courseName", "credit", "semester", "examWeight", "assignmentWeight"};
+    final private String[] course = {"courseID", "lecturerID", "courseName", "credit", "semester", "examWeight", "assignmentWeight"};
     final private String[] recoveryEnrollment = {"enrollmentID", "studentID", "courseID", "type", "status"};
+    final private String[] studentGrade = {"studentID" , "courseID", "exam", "assignment"};
+    final private String[] recoveryPhase = {"phaseID", "enrollmentID", "phase", "task"};
     //TODO need to add all the headers for the file
     
     public List<String> dbHeaderSearch(String filename) { 
@@ -68,6 +70,12 @@ public class FileService {
                 
             case "recoveryEnrollment":
                 return Arrays.asList(recoveryEnrollment);
+                
+            case "studentGrade":
+                return Arrays.asList(studentGrade);
+                
+            case "recoveryPhase":
+                return Arrays.asList(recoveryPhase);
                 
             default:
                 return new ArrayList<>();

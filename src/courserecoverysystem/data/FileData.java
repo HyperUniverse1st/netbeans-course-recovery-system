@@ -53,7 +53,18 @@ public class FileData {
         return fileData;
     }
     
-    
+    public static List<String> parseLine(String line) {
+        List<String> parts = new ArrayList<>();
+        if (line == null || line.isEmpty()) return parts;
+
+        // Split by '|'
+        String[] arr = line.split("\\|");
+
+        for (String s : arr) {
+            parts.add(s.trim());
+        }
+        return parts;
+    }
     
     public void fileAppendWrite(String filename, String content) {
         try {

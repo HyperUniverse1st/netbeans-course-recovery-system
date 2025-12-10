@@ -33,12 +33,12 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="449" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" pref="448" max="-2" attributes="0"/>
                   <Component id="roundedPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="382" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,36 +71,43 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblStudentName" min="-2" pref="214" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="lblStudentID" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                      <Component id="cmbCourse" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="lblStudentGrade" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="lblMajor" alignment="0" pref="157" max="32767" attributes="0"/>
+                      <Component id="cmbCourse" min="-2" pref="151" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel6" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="txtName" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="txtStudentID" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="cmbRecovery" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel5" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="txtMajor" pref="157" max="32767" attributes="0"/>
+                          <Component id="txtGrade" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="cmbRecovery" min="-2" pref="156" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel9" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="lblYear" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                      <Component id="lblStudentGPA" min="-2" pref="114" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" pref="75" max="-2" attributes="0"/>
                       <Component id="cmbStatus" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="txtYear" pref="155" max="32767" attributes="0"/>
+                          <Component id="txtCGPA" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="110" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
@@ -124,11 +131,11 @@
                               <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblStudentName" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="txtName" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" pref="37" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblStudentID" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="txtStudentID" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
@@ -136,30 +143,30 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel2" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblStudentGrade" min="-2" pref="59" max="-2" attributes="0"/>
+                                  <Component id="txtGrade" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel4" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblStudentGPA" min="-2" pref="59" max="-2" attributes="0"/>
+                                  <Component id="txtCGPA" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jLabel8" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblMajor" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="txtMajor" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel9" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblYear" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="txtYear" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -211,22 +218,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="GPA"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblStudentName">
-          <Properties>
-            <Property name="verticalAlignment" type="int" value="1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblStudentGrade">
-          <Properties>
-            <Property name="verticalAlignment" type="int" value="1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblStudentGPA">
-          <Properties>
-            <Property name="verticalAlignment" type="int" value="1"/>
+            <Property name="text" type="java.lang.String" value="CGPA"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -266,11 +258,6 @@
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblStudentID">
-          <Properties>
-            <Property name="verticalAlignment" type="int" value="1"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -279,22 +266,12 @@
             <Property name="text" type="java.lang.String" value="Major"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblMajor">
-          <Properties>
-            <Property name="verticalAlignment" type="int" value="1"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Year"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblYear">
-          <Properties>
-            <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbCourse">
@@ -378,6 +355,27 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtName">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtStudentID">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtGrade">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtMajor">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtCGPA">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCGPAActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtYear">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtYearActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

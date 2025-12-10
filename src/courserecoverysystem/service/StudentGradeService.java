@@ -4,6 +4,7 @@
  */
 package courserecoverysystem.service;
 import courserecoverysystem.data.FileData;
+import courserecoverysystem.model.Course;
 import courserecoverysystem.model.StudentGrade;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,4 +56,52 @@ public class StudentGradeService {
         }
         return failed;
     }
+    
+    // Return all grade records for a student
+    public List<StudentGrade> getGradesByStudent(String studentId) {
+        List<String> rows = fileService.retrieveAllMatchLine("studentGrade", "studentID", studentId);
+        List<StudentGrade> results = new ArrayList<>();
+
+        for (String row : rows) {
+            List<String> cols = FileData.parseLine(row);
+            results.add(new StudentGrade(
+                    cols.get(0),                  // studentID
+                    cols.get(1),                  // courseID
+                    Integer.parseInt(cols.get(2)),// exam_score
+                    Integer.parseInt(cols.get(3)) // assignment_score
+            ));
+        }
+        return results;
+    }
+
+    // Return ONE grade for (student, course)
+    public StudentGrade getStudentGrade(String studentId, String courseId) {
+        List<StudentGrade> grades = getGradesByStudent(studentId);
+
+        for (StudentGrade g : grades) {
+            if (g.getCourseID().equals(courseId)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
+    // Compute final numeric score
+    public double computeFinalScore(StudentGrade sg, Course c) {
+        double examWeight = Double.parseDouble(c.getExamWeight()) / 100.0;
+        double assignmentWeight = Double.parseDouble(c.getAssignmentWeight()) / 100.0;
+        
+        return sg.getExamScore() * examWeight
+             + sg.getAssignmentScore() * assignmentWeight;
+    }
+
+    // Convert final score → Letter grade
+    public String computeLetterGrade(double score) {
+        if (score >= 85) return "A";
+        if (score >= 70) return "B";
+        if (score >= 55) return "C";
+        if (score >= 40) return "D";
+        return "F";
+    }
+
 }
