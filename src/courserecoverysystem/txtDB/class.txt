@@ -1,4 +1,0 @@
-C003|Computer Science|Tan Wei Ling|13 Dec 2025|10:45 - 12:45|S001
-C004|Philosophy|Siti Zulaikha|12 Dec 2025|13:30 - 15:30|S034
-C005|Literature|Jonathan Lee|15 Dec 2025|13:30 - 15:30|S012,S023,S082
-C006|Computer Science|Ali Ahmad|12 Dec 2025|10:45 - 12:45|S002

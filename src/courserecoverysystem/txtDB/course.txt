@@ -1,10 +1,30 @@
 C201|L001|Database Systems|4|Summer|69|31
 C202|L002|Chemistry|3|Spring|79|21
 C203|L003|History|2|Fall|52|48
-C204|L002|Algorithms|4|Fall|43|57
-C205|L004|Mathematics|4|Fall|53|47
-C206|L005|Operating Systems|4|Spring|71|29
-C207|L004|Chemistry|4|Summer|61|39
-C208|L001|Economics|4|Summer|47|53
-C209|L006|Operating Systems|2|Spring|64|36
-C210|L005|Database Systems|2|Summer|75|25
+C204|L004|Algorithms|4|Fall|43|57
+C205|L005|Mathematics|4|Fall|53|47
+C206|L006|Operating Systems|4|Spring|71|29
+C207|L007|Chemistry|4|Summer|61|39
+C208|L008|Economics|4|Summer|47|53
+C209|L009|Operating Systems|2|Spring|64|36
+C210|L010|Database Systems|2|Summer|75|25
+C211|L011|Algorithms|3|Fall|80|20
+C212|L012|Physics|4|Spring|55|45
+C213|L013|Chemistry|3|Summer|72|28
+C214|L014|History|2|Spring|68|32
+C215|L015|Economics|4|Fall|60|40
+C216|L016|Mathematics|4|Spring|58|42
+C217|L017|Biology|3|Summer|65|35
+C218|L018|Statistics|3|Fall|70|30
+C219|L019|Philosophy|2|Spring|50|50
+C220|L020|Literature|3|Fall|62|38
+C221|L021|Computer Science|4|Spring|78|22
+C222|L022|Engineering|4|Fall|67|33
+C223|L023|Sociology|3|Summer|73|27
+C224|L024|Psychology|3|Spring|69|31
+C225|L025|Art History|2|Fall|55|45
+C226|L026|Music Theory|3|Summer|74|26
+C227|L027|Environmental Science|4|Fall|63|37
+C228|L028|Political Science|3|Spring|71|29
+C229|L029|Business Management|4|Summer|66|34
+C230|L030|Law|3|Fall|59|41

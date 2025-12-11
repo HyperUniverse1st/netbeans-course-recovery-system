@@ -3,22 +3,114 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package courserecoverysystem.view.student;
-import courserecoverysystem.view.officer.*;
-import java.awt.CardLayout;
-import java.awt.Container;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import courserecoverysystem.data.FileData;
+import courserecoverysystem.service.FileService;
+import courserecoverysystem.model.Student;
+import courserecoverysystem.model.User;
+import courserecoverysystem.service.StudentService;
+import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 
 public class StudentSchedule extends javax.swing.JPanel {
+    private final FileData fileData = new FileData();
+    private final FileService fileService = new FileService();
+    private String studentId;
+    private DefaultTableModel tableModel;
+    
     public StudentSchedule() {
         initComponents();
-        // unsure of what to add for schedule....
-        // btnRefresh
+        tableModel = (DefaultTableModel) scheduleTable.getModel();
+        System.out.println("StudentSchedule() default constructor.");
+        this.addComponentListener(new java.awt.event.ComponentAdapter(){
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e){
+                loadSchedule();
+            }
+        });
+    }
+    
+    private void loadSchedule(){
+        tableModel.setRowCount(0);
+        
+        User currentUser = User.getCurrentUser();
+        if (currentUser == null){
+            System.out.println("No current user set.");
+            return;
+        }
+        
+        String loginUserId = currentUser.getUID();
+        System.out.println("Current login user ID: " + loginUserId);
+        
+        StudentService studentService = new StudentService();        
+        String foundStudentId = null;
+        
+        for (Student s : studentService.getAllStudents()) {
+            if (s.getUserID().equals(loginUserId)) {
+                foundStudentId = s.getStudentID();
+                break;
+            }
+        }
+
+        if (foundStudentId == null) {
+            System.out.println("No student record found for userID = " + loginUserId);
+            return;
+        }
+
+        this.studentId = foundStudentId;
+        System.out.println("Loading schedule for student: " + this.studentId);
+
+        List<String> lines = fileData.fileRead("class");
+        System.out.println("Total class lines: " + lines.size());
+        
+        for(String line : lines){
+            if(line.trim().isEmpty()) continue;
+            
+            List<String> values = fileService.parseLine(line);
+            if(values.size() < 6) continue;
+            
+            String classId = values.get(0).trim();
+            String courseName = values.get(1).trim();
+            String lecturerName = values.get(2).trim();
+            String date = values.get(3).trim();
+            String time = values.get(4).trim();
+            String studentList = values.get(5).trim();
+            
+            boolean belongsToStudent = false;
+            for(String id : studentList.split(",")){
+                if(id.trim().equals(studentId)){
+                    belongsToStudent = true;
+                    break;
+                };
+            }
+            if(!belongsToStudent){
+                continue;
+            }
+            
+            // get courseId by searching courseName in course.txt
+            String courseId = getCourseIdByCourseName(courseName);
+            
+            tableModel.addRow(new Object[]{classId, courseId, courseName, lecturerName, date, time});
+        }
+    }
+    
+    private String getCourseIdByCourseName(String courseName){
+        List<String> courseLines = fileService.retrieveAllLine("course");
+        
+        for(String line : courseLines){
+            if (line == null || line.trim().isEmpty()) continue;
+            
+            List<String> values = fileService.parseLine(line);
+            if(values.size() < 3) continue;
+            String courseIdFromFile = values.get(0).trim();
+            String courseNameFromFile = values.get(2).trim();
+            
+            if(courseNameFromFile.equalsIgnoreCase(courseName.trim())){
+                return courseIdFromFile;
+            }
+        }
+        return "-"; //if not found
     }
     
     
@@ -29,6 +121,8 @@ public class StudentSchedule extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         roundedPanel1 = new courserecoverysystem.uiElements.RoundedPanel();
         btnRefresh = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        scheduleTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(78, 118, 163));
         setDoubleBuffered(false);
@@ -48,21 +142,46 @@ public class StudentSchedule extends javax.swing.JPanel {
             }
         });
 
+        scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Class ID", "Course ID", "Course Name", "Lecturer Name", "Date", "Time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(scheduleTable);
+
         javax.swing.GroupLayout roundedPanel1Layout = new javax.swing.GroupLayout(roundedPanel1);
         roundedPanel1.setLayout(roundedPanel1Layout);
         roundedPanel1Layout.setHorizontalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(800, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         roundedPanel1Layout.setVerticalGroup(
             roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel1Layout.createSequentialGroup()
-                .addGap(546, 546, 546)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -70,7 +189,7 @@ public class StudentSchedule extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(403, Short.MAX_VALUE)
+                .addContainerGap(406, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -79,7 +198,7 @@ public class StudentSchedule extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -88,13 +207,15 @@ public class StudentSchedule extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
+        loadSchedule();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private courserecoverysystem.uiElements.RoundedPanel roundedPanel1;
+    private javax.swing.JTable scheduleTable;
     // End of variables declaration//GEN-END:variables
 }

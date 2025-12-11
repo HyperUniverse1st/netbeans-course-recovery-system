@@ -1,50 +1,30 @@
-L001|Ali Ahmad|ali@apu.edu.my|0123456789|Computer Science
-L002|Mary Tan|mary@apu.edu.my|0192223333|Computer Science
-L003|Kevin Lim|kevinlim@apu.edu.my|0123456780|Computer Science
-L004|Nur Aisyah|naisyah@apu.edu.my|0134567890|Computer Science
-L005|Jason Lee|jasonlee@apu.edu.my|0145678901|Computer Science
-L006|Tan Wei Ling|weiling.tan@apu.edu.my|0156789012|Computer Science
-L007|Farid Rahman|farid.rahman@apu.edu.my|0167890123|Computer Science
-L008|Sean Ng|seanng@apu.edu.my|0134323456|Engineering
-L009|Sean Yap|seanyap@apu.edu.my|0167856854|Engineering
-L010|Lim Kah Hoong|kahhoong.lim@apu.edu.my|0178901234|Engineering
-L011|Amirul Hakim|amirul.hakim@apu.edu.my|0189012345|Engineering
-L012|Wong Jia Hui|jiahui.wong@apu.edu.my|0190123456|Engineering
-L013|Priya Menon|priya.menon@apu.edu.my|0111234567|Engineering
-L014|Danial Firdaus|danial.firdaus@apu.edu.my|0129876543|Engineering
-L015|Emal|emal@apu.edu.my|0178675475|Philosophy
-L016|Jo|jo@apu.edu.my|0145647382|Philosophy
-L017|Siti Zulaikha|zulaikha.siti@apu.edu.my|0139876543|Philosophy
-L018|Mark Tan|marktan@apu.edu.my|0149876543|Philosophy
-L019|Anjali Kumar|anjali.kumar@apu.edu.my|0159876543|Philosophy
-L020|Hafiz Abdullah|hafiz.abdullah@apu.edu.my|0169876543|Philosophy
-L021|Eugene|eugene@apu.edu.my|0124567465|Mathematics
-L022|Iean|iean@apu.edu.my|0111145647|Mathematics
-L023|Lim Yi Xuan|yixuan.lim@apu.edu.my|0179876543|Mathematics
-L024|Nurul Izzah|nurul.izzah@apu.edu.my|0189876543|Mathematics
-L025|Peter Chong|peter.chong@apu.edu.my|0199876543|Mathematics
-L026|Grace Wong|grace.wong@apu.edu.my|0112345678|Mathematics
-L027|Chloe|chloe@apu.edu.my|0134564754|Physics
-L028|Ester|ester@apu.edu.my|0115675844|Physics
-L029|Khoo Jin Hao|jinhao.khoo@apu.edu.my|0122345678|Physics
-L030|Syafiq Roslan|syafiq.roslan@apu.edu.my|0132345678|Physics
-L031|Michelle Tan|michelle.tan@apu.edu.my|0142345678|Physics
-L032|Andrew Goh|andrew.goh@apu.edu.my|0152345678|Physics
-L033|Rachel Lim|rachel.lim@apu.edu.my|0162345678|Literature
-L034|Nur Athirah|nur.athirah@apu.edu.my|0172345678|Literature
-L035|Jonathan Lee|jonathan.lee@apu.edu.my|0182345678|Literature
-L036|Chong Mei Yee|meiyee.chong@apu.edu.my|0192345678|Literature
-L037|Aiman Zulkifli|aiman.zulkifli@apu.edu.my|0113456789|Literature
-L038|Serena Ng|serena.ng@apu.edu.my|0123456791|Literature
-L039|Tan Kok Leong|kokleong.tan@apu.edu.my|0133456791|Statistics
-L040|Liyana Rahim|liyana.rahim@apu.edu.my|0143456791|Statistics
-L041|Daniel Ho|daniel.ho@apu.edu.my|0153456791|Statistics
-L042|Carmen Lee|carmen.lee@apu.edu.my|0163456791|Statistics
-L043|Suresh Nair|suresh.nair@apu.edu.my|0173456791|Statistics
-L044|Nurul Hana|nurul.hana@apu.edu.my|0183456791|Statistics
-L045|Izzat Fauzi|izzat.fauzi@apu.edu.my|0193456791|Biology
-L046|Melissa Chong|melissa.chong@apu.edu.my|0114567892|Biology
-L047|Zara Ibrahim|zara.ibrahim@apu.edu.my|0124567892|Biology
-L048|Heng Wei Jie|weijie.heng@apu.edu.my|0134567892|Biology
-L049|Amelia Teh|amelia.teh@apu.edu.my|0144567892|Biology
-L050|Hannah Rivera|hannah.rivera@apu.edu.my|0154567892|Biology
+L001|U00003|Dr. Miller|Database Systems
+L002|U00004|Dr. Lee|Chemistry
+L003|U00005|Prof. Smith|History
+L004|U00006|Dr. Lee|Algorithms
+L005|U00007|Prof. Chen|Mathematics
+L006|U00008|Prof. Johnson|Operating Systems
+L007|U00009|Prof. Chen|Chemistry
+L008|U00010|Dr. Miller|Economics
+L009|U00011|Dr. Kumar|Operating Systems
+L010|U00012|Dr. Johnson|Database Systems
+L011|U00013|Dr. White|Algorithms
+L012|U00014|Dr. Brown|Physics
+L013|U00015|Dr. Martinez|Chemistry
+L014|U00016|Dr. Singh|History
+L015|U00017|Dr. Davis|Economics
+L016|U00018|Dr. Wilson|Mathematics
+L017|U00019|Dr. Clark|Biology
+L018|U00020|Dr. Lopez|Statistics
+L019|U00021|Dr. Young|Philosophy
+L020|U00022|Dr. Green|Literature
+L021|U00023|Dr. Hall|Computer Science
+L022|U00024|Dr. King|Engineering
+L023|U00025|Dr. Adams|Sociology
+L024|U00026|Dr. Baker|Psychology
+L025|U00027|Dr. Carter|Art History
+L026|U00028|Dr. Evans|Music Theory
+L027|U00029|Dr. Flores|Environmental Science
+L028|U00030|Dr. Gonzalez|Political Science
+L029|U00031|Dr. Harris|Business Management
+L030|U00032|Dr. Irving|Law
