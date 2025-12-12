@@ -28,9 +28,9 @@ public class RecoveryEnrollmentService {
             List<String> values = fileService.parseLine(line);
             Map<String, String> map = fileService.assignHeaderLine(FILE, values);
             
-            String enrollmentID = map.get("enrollmentID");
-            String studentID = map.get("studentID");
-            String courseID = map.get("courseID");
+            String enrollmentID = map.get("enrollment_id");
+            String studentID = map.get("student_id");
+            String courseID = map.get("course_id");
             String type = map.get("type");
             String status = map.get("status");
             
@@ -47,7 +47,7 @@ public class RecoveryEnrollmentService {
             List<String> values = fileService.parseLine(line);
             Map<String, String> map = fileService.assignHeaderLine(FILE, values);
 
-            if (studentID.equals(map.get("studentID"))) {
+            if (studentID.equals(map.get("student_id"))) {
                 return true; // found at least one record
             }
         }
@@ -55,7 +55,7 @@ public class RecoveryEnrollmentService {
     }
     
     public List<RecoveryEnrollment> getEnrollmentsByStudent(String studentId) {
-        List<String> rows = fileService.retrieveAllMatchLine("recoveryEnrollment", "studentID", studentId);
+        List<String> rows = fileService.retrieveAllMatchLine("recoveryEnrollment", "student_id", studentId);
         List<RecoveryEnrollment> results = new ArrayList<>();
 
         for (String row : rows) {
@@ -82,8 +82,8 @@ public class RecoveryEnrollmentService {
             List<String> values = fileService.parseLine(line);
             Map<String, String> map = fileService.assignHeaderLine(FILE, values);
             
-            String sId = map.get("studentID");
-            String cId = map.get("courseID");
+            String sId = map.get("student_id");
+            String cId = map.get("course_id");
             
             if(studentID.equals(sId) && courseID.equals(cId)){
                 count++;

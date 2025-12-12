@@ -59,18 +59,19 @@ public class StudentGradeService {
     
     // Return all grade records for a student
     public List<StudentGrade> getGradesByStudent(String studentId) {
-        List<String> rows = fileService.retrieveAllMatchLine("studentGrade", "studentID", studentId);
+        List<String> rows = fileService.retrieveAllMatchLine("studentGrade", "student_id", studentId);
         List<StudentGrade> results = new ArrayList<>();
 
         for (String row : rows) {
             
             List<String> cols = FileData.parseLine(row);
-            results.add(new StudentGrade(
-                    cols.get(0),                  // studentID
-                    cols.get(1),                  // courseID
-                    Integer.parseInt(cols.get(2)),// exam_score
-                    Integer.parseInt(cols.get(3)) // assignment_score
-            ));
+
+            String sid = cols.get(1); // studentID
+            String courseId = cols.get(2); // courseID
+            int examScore = Integer.parseInt(cols.get(3)); // exam_score
+            int assignmentScore = Integer.parseInt(cols.get(4)); // assignment_score
+            
+            results.add(new StudentGrade(sid, courseId, examScore, assignmentScore));
         }
         return results;
     }

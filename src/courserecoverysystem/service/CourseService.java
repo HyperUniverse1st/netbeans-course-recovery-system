@@ -31,7 +31,7 @@ public class CourseService {
             Map<String, String> map = fileService.assignHeaderLine(FILE, values);
             System.out.println("Debug course map: " + map);
             
-            String courseID = map.get("courseID");
+            String courseID = map.get("course_id");
             String lecturerID       = map.get("lecturerID");
             String courseName       = map.get("courseName");
             String credit           = map.get("credit");
@@ -78,7 +78,7 @@ public class CourseService {
     }
     
     public Course getCourseById(String courseId) {
-        List<String> cols = fileService.retrieveOneMatchLine("course", "courseID", courseId);
+        List<String> cols = fileService.retrieveOneMatchLine("course", "course_id", courseId);
         if (cols.isEmpty()) return null;
 
         return new Course(

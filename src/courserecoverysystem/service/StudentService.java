@@ -56,8 +56,8 @@ public class StudentService {
         List<String> lines = fileService.retrieveAllLine("student");
         if(lines == null || lines.isEmpty()) return null;
         
-        int studentIdIdx = fileService.getHeaderIndex("student", "studentID");
-        int userIdIdx = fileService.getHeaderIndex("student", "userID");
+        int studentIdIdx = fileService.getHeaderIndex("student", "student_id");
+        int userIdIdx = fileService.getHeaderIndex("student", "user_id");
 
         for(String line : lines){
             if(line == null || line.trim().isEmpty()) continue;

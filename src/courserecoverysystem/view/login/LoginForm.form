@@ -60,17 +60,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="LoginLabel" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="LoginBtn" min="-2" pref="362" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="SignUpLabel" pref="405" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="LoginLabel" pref="799" max="32767" attributes="0"/>
                               <Component id="EmailLabel" alignment="1" max="32767" attributes="0"/>
                               <Component id="PwdLabel" alignment="0" max="32767" attributes="0"/>
                               <Component id="PwdTF" alignment="0" max="32767" attributes="0"/>
                               <Component id="EmailTF" alignment="1" max="32767" attributes="0"/>
                               <Component id="ForgotPwdLabel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="LoginBtn" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                       </Group>
@@ -100,10 +96,7 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="ForgotPwdLabel" min="-2" pref="27" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="LoginBtn" alignment="3" max="32767" attributes="0"/>
-                      <Component id="SignUpLabel" alignment="3" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="LoginBtn" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -171,14 +164,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginBtnActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="SignUpLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Sign Up"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

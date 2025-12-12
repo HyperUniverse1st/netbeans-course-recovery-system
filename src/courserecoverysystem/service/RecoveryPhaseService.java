@@ -31,7 +31,7 @@ public class RecoveryPhaseService {
             List<String> values = fileService.parseLine(line);
             Map<String, String> map = fileService.assignHeaderLine(FILE, values);
             
-            String phaseID = map.get("phaseID");
+            String phaseID = map.get("phase_id");
             String phase = map.get("phase");
             String task = map.get("task");
             

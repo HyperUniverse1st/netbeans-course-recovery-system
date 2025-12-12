@@ -91,7 +91,6 @@ public class LoginForm extends javax.swing.JFrame {
         PwdTF = new javax.swing.JPasswordField();
         ForgotPwdLabel = new javax.swing.JLabel();
         LoginBtn = new javax.swing.JButton();
-        SignUpLabel = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -134,9 +133,6 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
-        SignUpLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        SignUpLabel.setText("Sign Up");
-
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel2.setText("APU Course Recovery System");
 
@@ -149,16 +145,13 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel1Layout.createSequentialGroup()
                         .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(LoginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, roundedPanel1Layout.createSequentialGroup()
-                                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(SignUpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
+                            .addComponent(LoginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
                             .addComponent(EmailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PwdLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PwdTF, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(EmailTF)
-                            .addComponent(ForgotPwdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ForgotPwdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LoginBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(122, 122, 122))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -182,9 +175,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(ForgotPwdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LoginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SignUpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(LoginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(111, 111, 111))
         );
 
@@ -252,22 +243,22 @@ public class LoginForm extends javax.swing.JFrame {
             String role = currentUser.getRole().toLowerCase();
 
             switch (role) {
-                case "2" -> {
+                case "lecturer" -> {
                     LoginScreen.SwapToLecturer();
                     LoginScreen.showContent("lhome");
                     this.dispose();
                 }
-                case "3" -> {
+                case "officer" -> {
                     LoginScreen.SwapToOfficer();
                     LoginScreen.showContent("ohome");
                     this.dispose();
                 }
-                case "1" -> {
+                case "admin" -> {
                     LoginScreen.SwapToAdmin();
                     LoginScreen.showContent("ahome");
                     this.dispose();
                 }
-                case "4" -> {
+                case "student" -> {
                     LoginScreen.SwapToStudent();
                     LoginScreen.showContent("shome");
                     this.dispose();
@@ -294,7 +285,6 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel LoginLabel;
     private javax.swing.JLabel PwdLabel;
     private javax.swing.JPasswordField PwdTF;
-    private javax.swing.JButton SignUpLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private courserecoverysystem.uiElements.RoundedPanel roundedPanel1;

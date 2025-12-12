@@ -23,14 +23,14 @@ public class AuthService {
     //TODO we really need to figure out the columns
     private Map<String, String> userMap = new HashMap<>();
     private String userFile = "user";
-    final private String usernameColumn = "email";
+    final private String emailColumn = "email";
     final private String passwordColumn = "password";
     private User currentUser;  //TODO you think we need this?
 
-    public boolean validateCredentials(String username, String password) {
+    public boolean validateCredentials(String email, String password) {
         FileService file = new FileService();
         
-        List<String> userData = file.retrieveOneMatchLine(userFile, usernameColumn, username);
+        List<String> userData = file.retrieveOneMatchLine(userFile, emailColumn, email);
         //TODO add whatever if username not found
         if (userData.isEmpty()) {
             return false;
@@ -41,16 +41,17 @@ public class AuthService {
         if (userData.get(passwordColumnIndex).equals(password)) {
 
             mapUserData(userFile, userData);
+            System.out.println("usermap debug: " + userMap);
 
             currentUser = new User(); //TODO add all user values 
 //            currentUser.setName(userMap.get("name")); TODO you need to add this some time evenutally      
-            currentUser.setUID(userMap.get("uid"));  
-            currentUser.setEmail(userMap.get("username"));  
+            currentUser.setUID(userMap.get("user_id"));  
+            currentUser.setEmail(userMap.get("email"));  
             currentUser.setRole(userMap.get("role"));       
             currentUser.setPassword(userMap.get("password"));              
 
             User.setCurrentUser(currentUser); //TODO you think we need this?
-
+            System.out.println("debug use: " + currentUser.getUID());
             return true;
         }
         //TODO if password is not a match
@@ -66,9 +67,9 @@ public class AuthService {
         return userMap;
     }
     
-    public boolean resetPassword(String username, String password) {
+    public boolean resetPassword(String email, String password) {
         FileService file = new FileService();
-        file.editOneMatchLine(userFile, usernameColumn, username, passwordColumn, password);
+        file.editOneMatchLine(userFile, emailColumn, email, passwordColumn, password);
         return true; //TODO it is temp will always give true i will prob fix this later
     }
 }
