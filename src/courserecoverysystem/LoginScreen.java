@@ -152,6 +152,7 @@ public class LoginScreen {
         mainPanel.add(new StudentCourseDetails(), "sviewcoursedetails");
         mainPanel.add(new StudentSchedule(), "sviewschedule");
         mainPanel.add(new UserProfile(), "userprofile");
+        mainPanel.add(new StudentReport(), "sreport");
         
         if (sidebar != null) { 
             mainFrame.getContentPane().remove(sidebar); 

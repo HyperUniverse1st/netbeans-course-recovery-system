@@ -9,6 +9,7 @@ package courserecoverysystem.service;
  * @author seany
  */
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -50,6 +51,7 @@ public class GradeService {
         return totalCredits == 0 ? 0.0 : totalQualityPoints / totalCredits;
     }
 
+    
     
     
     public List<List<String>> getGradesBySemester(String studentId, String semester) {
@@ -101,7 +103,7 @@ public class GradeService {
 
     
     
-    private double convertToGradePoint(int score) {
+    public double convertToGradePoint(int score) {
         if (score >= 85) return 4.0;
         if (score >= 70) return 3.0;
         if (score >= 55) return 2.0;
@@ -160,6 +162,41 @@ public class GradeService {
         return ineligible;
     }
     
+    
+public List<Map<String, String>> getIneligibleStudentsNotEnrolled() {
+    List<Map<String, String>> result = new ArrayList<>();
+
+    List<String> ineligibleIds = getIneligibleStudents();
+
+    int studentIdIndex = file.getHeaderIndex("recoveryEnrollment", "student_id");
+    int courseIdIndex = file.getHeaderIndex("recoveryEnrollment", "course_id");
+
+    for (String studentId : ineligibleIds) {
+        List<String> failedCourses = getFailedCourses(studentId);
+
+        for (String courseId : failedCourses) {
+            // Get all enrollments of this student
+            List<String> enrollmentRows = file.retrieveAllMatchLine("recoveryEnrollment", "student_id", studentId);
+
+            boolean alreadyEnrolled = enrollmentRows.stream().anyMatch(line -> {
+                List<String> cols = file.parseLine(line);
+                return cols.get(courseIdIndex).equals(courseId);
+            });
+
+            if (!alreadyEnrolled) {
+                List<String> studentLine = file.retrieveOneMatchLine("student", "student_id", studentId);
+                if (!studentLine.isEmpty()) {
+                    Map<String, String> studentMap = file.assignHeaderLine("student", studentLine);
+                    studentMap.put("failed_course", courseId);
+                    result.add(studentMap);
+                }
+            }
+        }
+    }
+
+    return result;
+}
+    
         public int countRecoveryAttempts(String studentId, String courseId) {
         List<String> attempts = file.retrieveAllMatchLine("recoveryenrollment", "student_id", studentId);
         long attemptCount = attempts.stream()
@@ -206,5 +243,28 @@ public class GradeService {
         }
 
         return failedComponents;
+    }
+    
+    
+        public static void main(String[] args) {
+        FileService fileService = new FileService();
+        GradeService gradeService = new GradeService();
+
+        // Example wrapper class for the method we discussed
+ 
+
+        List<Map<String, String>> studentsToEnroll = gradeService.getIneligibleStudentsNotEnrolled();
+
+        if (studentsToEnroll.isEmpty()) {
+            System.out.println("No ineligible students pending enrollment.");
+        } else {
+            System.out.println("Ineligible students who can be enrolled in recovery:");
+            for (Map<String, String> student : studentsToEnroll) {
+                System.out.println("Student ID: " + student.get("student_id"));
+                System.out.println("Name: " + student.get("first_name") + " " + student.get("last_name"));
+                System.out.println("Failed Course: " + student.get("failed_course"));
+                System.out.println("----------------------------");
+            }
+        }
     }
 }

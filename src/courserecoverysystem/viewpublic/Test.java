@@ -37,9 +37,7 @@ public class Test extends javax.swing.JPanel {
                       
         
         academicReportService = new AcademicReportService();
-        academicReportService.buildReport(header, list);
         academicReportService.previewReport(jPanel1);
-        academicReportService.exportReport(header, list);
         
     }
 

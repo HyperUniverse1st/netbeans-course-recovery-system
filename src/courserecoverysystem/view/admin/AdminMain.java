@@ -189,35 +189,35 @@ public class AdminMain extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     private void SwapToStudents() { 
-    Container parent = this.getParent();
-    if (parent instanceof JPanel) {
-        CardLayout layout = (CardLayout) parent.getLayout();
-        layout.show(parent, "aviewstudents");
-    }
+        Container parent = this.getParent();
+        if (parent instanceof JPanel) {
+            CardLayout layout = (CardLayout) parent.getLayout();
+            layout.show(parent, "aviewstudents");
+        }
     }
 
     private void SwapToClasses() { 
-    Container parent = this.getParent();
-    if (parent instanceof JPanel) {
-        CardLayout layout = (CardLayout) parent.getLayout();
-        layout.show(parent, "aviewclasses");
-    }
+        Container parent = this.getParent();
+        if (parent instanceof JPanel) {
+            CardLayout layout = (CardLayout) parent.getLayout();
+            layout.show(parent, "aviewclasses");
+        }
     }
     
     private void SwapToCourses() { 
-    Container parent = this.getParent();
-    if (parent instanceof JPanel) {
-        CardLayout layout = (CardLayout) parent.getLayout();
-        layout.show(parent, "aviewcourse");
-    }
+        Container parent = this.getParent();
+        if (parent instanceof JPanel) {
+            CardLayout layout = (CardLayout) parent.getLayout();
+            layout.show(parent, "aviewcourse");
+        }
     }
     
     private void SwapToLecturer() { 
-    Container parent = this.getParent();
-    if (parent instanceof JPanel) {
-        CardLayout layout = (CardLayout) parent.getLayout();
-        layout.show(parent, "aviewlecturers");
-    }
+        Container parent = this.getParent();
+        if (parent instanceof JPanel) {
+            CardLayout layout = (CardLayout) parent.getLayout();
+            layout.show(parent, "aviewlecturers");
+        }
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

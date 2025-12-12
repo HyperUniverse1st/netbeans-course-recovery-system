@@ -8,220 +8,138 @@ package courserecoverysystem.service;
  *
  * @author seany
  */
-import com.itextpdf.layout.element.*;
+import com.itextpdf.layout.element.IBlockElement;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Div;
-import com.itextpdf.layout.properties.TextAlignment;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.VerticalAlignment;
-import com.itextpdf.io.image.ImageData;
+import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.layout.element.Tab;
+import com.itextpdf.layout.element.TabStop;
+import com.itextpdf.layout.properties.TabAlignment;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.List;
-import java.util.LinkedHashMap;
 import java.io.InputStream;
 import java.io.IOException;
-/*
-Okay the only thing you need to know is to call it is just like this
-
-    This is to create it
-            List<String> header = new ArrayList<>();
-            header.add("Header1");
-            header.add("Header2");
-            header.add("Header3");
-
-            Better if this was already a ListArray
-            String[] table = {"Value1|Value2|Value3","Value1|Value2|Value3"};
-
-            This is to just convert to a ListArray
-            List<String> list = new ArrayList<>(Arrays.asList(table));
-
-            This just calls it
-            academicReportService = new AcademicReportService();
-
-            This will build the report
-            academicReportService.buildReport(header, list);
-
-
-
-        This will allow you put it in a panel
-        academicReportService.previewReport(ExamplePanel);
-
-        This will pull out a dialog where you can select where to save
-        academicReportService.exportReport(header, list);
-*/
-
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.Arrays;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.JFileChooser;
 
 public class AcademicReportService {
 
     private final PDFService pdfService;
+    private final ReportHelper helper = new ReportHelper();
+    private final GradeService grade = new GradeService();
+    private final FileService data = new FileService();
     private List<IBlockElement> reportElements;
-     private final ReportHelper helper = new ReportHelper();
 
     public AcademicReportService() {
         this.pdfService = new PDFService();
         this.reportElements = new ArrayList<>();
     }
 
-    public List<IBlockElement> buildReport(List<String> header, List<String> content) {
+    public List<IBlockElement> buildReport(String studentId) {
         reportElements = new ArrayList<>();
-       
-        addHead("Student Academic Report");
-        reportElements.add(new Paragraph("\n"));
-        addBody(header, content);
-        reportElements.add(new Paragraph("\n"));
+        addHead(studentId);
+        addBody(studentId);
         addFooter();
         return reportElements;
     }
 
-
-    private void addHead(String titleText) {
-
+    private void addHead(String studentId) {
         Table table = new Table(new float[]{1, 3}).useAllAvailableWidth();
         Cell logoCell = new Cell().setBorder(null);
-
-        try (InputStream is = getClass().getResourceAsStream("/resources/pfp/Logo.png")) { //TODO j please make gradescale version
-            if (is == null) {
-                throw new RuntimeException("Image not found");
-            }
-
-            Image logo = new Image(ImageDataFactory.create(is.readAllBytes()))
-                    .scaleToFit(100, 100);
-
+        try (InputStream is = getClass().getResourceAsStream("/resources/pfp/Logo.png")) {
+            if (is == null) throw new RuntimeException("Image not found");
+            Image logo = new Image(ImageDataFactory.create(is.readAllBytes())).scaleToFit(100, 100);
             logoCell.add(new Paragraph().add(logo).setTextAlignment(TextAlignment.LEFT));
-
         } catch (IOException e) {
             throw new RuntimeException("Failed to load logo image", e);
         }
-
         table.addCell(logoCell);
 
-        Cell titleCell = new Cell()
-                .setBorder(null)
-                .setVerticalAlignment(VerticalAlignment.MIDDLE)
-                .setPaddingLeft(100);  
-
-        titleCell.add(
-            new Paragraph(titleText)
-                    .setBold()
-                    .setFontSize(18)
-                    .setTextAlignment(TextAlignment.LEFT)
-                    .setMarginBottom(5)
-        );
+        Cell titleCell = new Cell().setBorder(null).setVerticalAlignment(VerticalAlignment.MIDDLE).setPaddingLeft(100);
 
         Map<String, String> studentInfo = new LinkedHashMap<>();
-        studentInfo.put("Student Name", "Something"); //TODO put the getters here
-        studentInfo.put("Student ID", "Something");
-        studentInfo.put("Program", "Something");
+        List<String> studentRow = data.retrieveOneMatchLine("student", "student_id", studentId);
+        studentInfo.put("Student Name", studentRow.size() >= 4 ? studentRow.get(2) + " " + studentRow.get(3) : "Unknown");
+        studentInfo.put("Student ID", studentId);
+        studentInfo.put("Program", studentRow.size() >= 5 ? studentRow.get(4) : "Unknown");
 
+        titleCell.add(new Paragraph("Student Academic Report").setBold().setFontSize(18).setMarginBottom(5));
         studentInfo.forEach((key, value) ->
-            titleCell.add(
-                new Paragraph()
-                    .add(new Text(key + ": ").setBold())
-                    .add(new Text(value))
-                    .setMargin(0)
-                    .setTextAlignment(TextAlignment.LEFT) 
-            )
+                titleCell.add(new Paragraph().add(new Text(key + ": ").setBold()).add(new Text(value)).setMargin(0))
         );
 
         table.addCell(titleCell);
         reportElements.add(table);
+        reportElements.add(new Paragraph("\n"));
     }
 
+    private void addBody(String studentId) {
+        Set<String> semesters = grade.getAllStudentSemester(studentId);
+        int count = 0;
+        int totalSemesters = semesters.size();
 
-
-    private void addBody(List<String> header, List<String> content) {
-        helper.addStudentInfo(reportElements, helper.buildStudentInfo());
-        reportElements.add(helper.buildTable(header, content));
+        for (String semester : semesters) {
+            count++;
+            boolean isLast = (count == totalSemesters);
+            helper.addSemesterTable(reportElements, studentId, semester, isLast, grade, data);
+            reportElements.add(new Paragraph("\n"));
+        }
     }
 
-
-    
     private void addFooter() {
-        reportElements.add(new Paragraph("Grading Scale"));
         reportElements.add(helper.buildGradingScale());
     }
-                     
-                      
-    
+
     public void previewReport(JPanel targetPanel) {
         if (reportElements == null || reportElements.isEmpty()) return;
-
         byte[] pdfBytes = pdfService.createPDFPreview(reportElements);
         if (pdfBytes == null || pdfBytes.length == 0) return;
 
         try (PDDocument document = PDDocument.load(new ByteArrayInputStream(pdfBytes))) {
             PDFRenderer renderer = new PDFRenderer(document);
             BufferedImage image = renderer.renderImageWithDPI(0, 150);
-
-            JLabel imageLabel = new JLabel();
+            JLabel imageLabel = new JLabel(new ImageIcon(image));
             imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-            JPanel imagePanel = new JPanel(new BorderLayout());
-            imagePanel.add(imageLabel, BorderLayout.CENTER);
-            imagePanel.setBackground(Color.DARK_GRAY);
-
-            JScrollPane scrollPane = new JScrollPane(imagePanel);
-            scrollPane.setBorder(null);
+            JScrollPane scrollPane = new JScrollPane(imageLabel);
             scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-
-            Runnable updateImage = () -> {
-                int panelWidth = targetPanel.getWidth();
-                if (panelWidth <= 0) return;
-
-                double aspectRatio = (double) image.getHeight() / image.getWidth();
-                int scaledWidth = panelWidth;
-                int scaledHeight = (int) (scaledWidth * aspectRatio);
-
-                java.awt.Image scaledImage = image.getScaledInstance(scaledWidth, scaledHeight, java.awt.Image.SCALE_SMOOTH);
-                imageLabel.setIcon(new ImageIcon(scaledImage));
-
-                imagePanel.setPreferredSize(new Dimension(scaledWidth, scaledHeight));
-                imagePanel.revalidate();
-            };
-
-            targetPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
-                @Override
-                public void componentResized(java.awt.event.ComponentEvent e) {
-                    updateImage.run();
-                }
-            });
-
-            SwingUtilities.invokeLater(updateImage);
 
             targetPanel.removeAll();
             targetPanel.setLayout(new BorderLayout());
             targetPanel.add(scrollPane, BorderLayout.CENTER);
             targetPanel.revalidate();
             targetPanel.repaint();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    
-    
-    public void exportReport(List<String> header, List<String> content) {
-        if (reportElements == null || reportElements.isEmpty()) return;
+    public void exportReport(String studentId) {
+        List<IBlockElement> rebuildReport = buildReport(studentId);
 
-        List<IBlockElement> rebuildReport = buildReport(header, content);
-        
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Save Report As...");
-        chooser.setSelectedFile(new File("StudentReport.pdf"));
 
         int result = chooser.showSaveDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -233,13 +151,16 @@ public class AcademicReportService {
 
             try {
                 Desktop.getDesktop().open(new File(filename));
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
     }
-    
+
+    public static void main(String[] args) {
+        AcademicReportService r = new AcademicReportService();
+        r.exportReport("S001");
+    }
 }
-    
+
 class ReportHelper {
 
     Table buildTable(List<String> header, List<String> content) {
@@ -275,47 +196,126 @@ class ReportHelper {
     }
 
     Table buildGradingScale() {
-        List<String> header = Arrays.asList("Grade", "Scale", "Division", "GPA"); //TODO the header of grade scaling
+        Table table = new Table(1)
+                .useAllAvailableWidth()
+                .setMarginTop(10)
+                .setMarginBottom(10);
 
-        List<String> content = Arrays.asList( //TODO might need to change
-            "A*|80 - 100|Distinction|4.0",
-            "A|75 - 79|Distinction|3.7",
-            "B+|70 - 74|Merit|3.3",
-            "B|65 - 69|Merit|3.0",
-            "C+|60 - 64|Pass|2.7",
-            "C|55 - 59|Pass|2.5",
-            "C-|50 - 54|Pass|2.0",
-            "D|40 - 49|Fail (Marginal)|0.0"
-        );
+        Paragraph title = new Paragraph("Grading Scale")
+                .setBold()
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setMarginBottom(5);
 
-        return buildTable(header, content);
-    }
+        String[][] lines = new String[][]{
+            {"A*", "80 - 100", "Distinction", "4.0"},
+            {"A", "75 - 79", "Distinction", "3.7"},
+            {"B+", "70 - 74", "Merit", "3.3"},
+            {"B", "65 - 69", "Merit", "3.0"},
+            {"C+", "60 - 64", "Pass", "2.7"},
+            {"C", "55 - 59", "Pass", "2.5"},
+            {"C-", "50 - 54", "Pass", "2.0"},
+            {"D", "40 - 49", "Fail", "0.0"}
+        };
 
-    Map<String, String> buildStudentInfo() {
-        Map<String, String> studentInfo = new LinkedHashMap<>();
-        studentInfo.put("Semester", "Something"); //TODO use the student getters otherwise it will display something
-        studentInfo.put("Cumulative GPA (CGPA)", "Something");
-        return studentInfo;
-    }
+        Cell cell = new Cell().setPadding(10).setVerticalAlignment(VerticalAlignment.MIDDLE);
 
-    void addStudentInfo(List<IBlockElement> reportElements, Map<String, String> studentInfo) {
-        for (Map.Entry<String, String> entry : studentInfo.entrySet()) {
-            Text key = new Text(entry.getKey() + ": ").setBold();
-            Text value = new Text(entry.getValue());
+        cell.add(title);
 
-            Paragraph student = new Paragraph()
-                    .add(key)
-                    .add(value)
-                    .setMarginTop(0)
-                    .setMarginBottom(0);
-
-            reportElements.add(student);
+        float fullWidth = 520f; 
+        Paragraph p;
+        for (String[] parts : lines) {
+            p = new Paragraph()
+                    .setFontSize(11)
+                    .setMultipliedLeading(1.2f)
+                    .addTabStops(
+                            new TabStop(0, TabAlignment.LEFT),
+                            new TabStop(fullWidth / 3f, TabAlignment.CENTER),
+                            new TabStop(fullWidth * 2 / 3f, TabAlignment.CENTER),
+                            new TabStop(fullWidth, TabAlignment.RIGHT)
+                    );
+            p.add(parts[0]).add(new Tab())
+             .add(parts[1]).add(new Tab())
+             .add(parts[2]).add(new Tab())
+             .add(parts[3]);
+            cell.add(p);
         }
 
-        reportElements.add(new Paragraph().setMarginBottom(4));
+        table.addCell(cell);
+        return table;
+    }
+
+    void addSemesterTable(List<IBlockElement> reportElements, String studentId, String semester, boolean isLastSemester, GradeService grade, FileService data) {
+
+        reportElements.add(new Paragraph("Semester: " + semester).setBold().setFontSize(14));
+
+        List<String> header = Arrays.asList("Course ID", "Course Name", "Credit", "Exam Score", "Assignment Score", "Final Score", "Grade Point");
+        List<String> content = new ArrayList<>();
+
+        List<List<String>> grades = grade.getGradesBySemester(studentId, semester);
+
+        double semesterPoints = 0;
+        int semesterCredits = 0;
+
+        for (List<String> gradeCols : grades) {
+            String courseId = gradeCols.get(data.getHeaderIndex("studentgrade", "course_id"));
+            String examScore = gradeCols.get(data.getHeaderIndex("studentgrade", "exam_score"));
+            String assignmentScore = gradeCols.get(data.getHeaderIndex("studentgrade", "assignment_score"));
+            String finalScore = gradeCols.get(data.getHeaderIndex("studentgrade", "final_score"));
+            int credit = grade.getCourseCredit(courseId);
+            double gradePoint = grade.convertToGradePoint(Integer.parseInt(finalScore));
+
+            semesterPoints += gradePoint * credit;
+            semesterCredits += credit;
+
+            List<String> courseRow = data.retrieveOneMatchLine("course", "course_id", courseId);
+            String courseName = courseRow.isEmpty() ? "Unknown" : courseRow.get(data.getHeaderIndex("course", "course_name"));
+
+            content.add(String.join("|", Arrays.asList(
+                    courseId, courseName, String.valueOf(credit),
+                    examScore, assignmentScore, finalScore,
+                    String.valueOf(gradePoint)
+            )));
+        }
+
+        double semesterGPA = semesterCredits > 0 ? semesterPoints / semesterCredits : 0;
+
+        Table table = buildTable(header, content);
+
+        for (int i = 0; i < 4; i++) table.addCell(new Cell().setBorder(null));
+        table.addCell(new Cell(1, 2)
+                .add(new Paragraph("Semester GPA").setBold())
+                .setPadding(5)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE)
+        );
+        table.addCell(new Cell()
+                .add(new Paragraph(String.format("%.2f", semesterGPA)))
+                .setPadding(5)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE)
+        );
+
+        if (isLastSemester) {
+            double cgpa = grade.getCGPA(studentId);
+
+            for (int i = 0; i < 4; i++) table.addCell(new Cell().setBorder(null));
+
+            table.addCell(new Cell(1, 2)
+                    .add(new Paragraph("Cumulative GPA (CGPA)").setBold())
+                    .setPadding(5)
+                    .setTextAlignment(TextAlignment.LEFT)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+            );
+
+            table.addCell(new Cell()
+                    .add(new Paragraph(String.format("%.2f", cgpa)))
+                    .setPadding(5)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+            );
+        }
+
+        reportElements.add(table);
     }
 }
-
-
-
-
