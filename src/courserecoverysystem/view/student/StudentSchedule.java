@@ -27,7 +27,7 @@ public class StudentSchedule extends javax.swing.JPanel {
         });
     }
     
-    private void loadSchedule(){
+    public void loadSchedule(){
         tableModel.setRowCount(0);
         
         User currentUser = User.getCurrentUser();

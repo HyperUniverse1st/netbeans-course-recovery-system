@@ -1,1 +1,1 @@
-C001|Database System|Dr. Miller|13 Dec 2025|10:45 - 12:45|S001
+C001|Database Systems|Dr. Miller|13 Dec 2025|10:45 - 12:45|S001

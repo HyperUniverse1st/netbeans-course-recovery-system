@@ -13,8 +13,6 @@ import courserecoverysystem.service.StudentGradeService;
 import courserecoverysystem.service.StudentService;
 import courserecoverysystem.uiElements.TableUtils;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
