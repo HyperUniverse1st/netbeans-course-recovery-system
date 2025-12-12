@@ -45,42 +45,65 @@ Here you need to know is
 
 public class FileService {
     String separator = "\\|";
-    final private String[] user = {"uid","username", "password", "role"};
-    final private String[] student = {"studentID", "userID", "firstName", "lastName", "major", "year"};
-    final private String[] course = {"courseID", "lecturerID", "courseName", "credit", "semester", "examWeight", "assignmentWeight"};
-    final private String[] recoveryEnrollment = {"enrollmentID", "studentID", "courseID", "type", "status"};
-    final private String[] studentGrade = {"studentID" , "courseID", "exam", "assignment"};
-    final private String[] recoveryPhase = {"phaseID", "enrollmentID", "phase", "task"};
-    //TODO need to add all the headers for the file
+    final private String[] user = {"user_id", "email", "password", "role"};
+
+    final private String[] admin = {"admin_id", "user_id", "name"};
+
+    final private String[] officer = {"officer_id", "user_id", "name"};
+
+    final private String[] lecturer = {"lecturer_id", "user_id", "name"};
+
+    final private String[] student = {"student_id", "user_id", "first_name", "last_name", "major", "year"};
+
+    final private String[] course = {"course_id", "lecturer_id", "course_name", "credit","semester", "exam_weight", "assignment_weight"};
+
+    final private String[] studentGrade = {"grade_id", "student_id", "course_id","exam_score", "assignment_score", "final_score"};
+
+    final private String[] recoveryEnrollment = {"enrollment_id", "student_id", "course_id","type", "status"};
+
+    final private String[] recoveryPhase = {"phase_id", "enrollment_id", "phase", "task"};
+
+    
     
     public List<String> dbHeaderSearch(String filename) { 
         if (filename.endsWith(".txt")) {
             filename = filename.substring(0, filename.length() - 4);
         }
 
-        switch (filename) {
+        switch (filename.toLowerCase()) {
             case "user":
                 return Arrays.asList(user);
-                
+
+            case "admin":
+                return Arrays.asList(admin);
+
+            case "officer":
+                return Arrays.asList(officer);
+
+            case "lecturer":
+                return Arrays.asList(lecturer);
+
             case "student":
                 return Arrays.asList(student);
-                
+
             case "course":
                 return Arrays.asList(course);
-                
-            case "recoveryEnrollment":
-                return Arrays.asList(recoveryEnrollment);
-                
-            case "studentGrade":
+
+            case "studentgrade":
                 return Arrays.asList(studentGrade);
-                
-            case "recoveryPhase":
+
+            case "recoveryenrollment":
+                return Arrays.asList(recoveryEnrollment);
+
+            case "recoveryphase":
                 return Arrays.asList(recoveryPhase);
-                
+
             default:
                 return new ArrayList<>();
         }
     }
+    
+    
     
     public int getHeaderIndex(String filename, String column) {
         List<String> headers = dbHeaderSearch(filename);
@@ -108,12 +131,12 @@ public class FileService {
         return header.size() == line.size();
     }    
     
+    
 
     public String createLineString(List<String> values) {
         if (values == null || values.isEmpty()) {
             return "";
         }
-        
         return String.join("|", trim(values));
     }
     
@@ -143,7 +166,7 @@ public class FileService {
         Map<String, String> mappedValues = new HashMap<>();
         
         if (!lengthCheck(header, values)) {
-            return mappedValues; //TODO add error handling, like this one really needs one
+            ExceptionService.invalidLength(filename);
         }
         
         for (int i = 0; i < values.size(); i++) {
@@ -151,10 +174,9 @@ public class FileService {
         }
         return mappedValues;
     }
-            
     
     
-    //This is just helper method you dont need to read 
+    
     private List<String> getHeaderAndLines(String filename, String searchColumn, List<String> lines, boolean checkEmpty) {
         List<String> header = dbHeaderSearch(filename);
         int columnIndex = header.indexOf(searchColumn);
@@ -194,7 +216,6 @@ public class FileService {
         data.fileOverrrideWrite(filename, createContentString(newLines));
     }
     
-    //TODO
     private void editLines(String filename, String searchColumn, String searchValue, String editColumn, String editValue, List<String> newRow, boolean editAll) {
         FileData data = new FileData();
         List<String> lines = data.fileRead(filename);
@@ -331,7 +352,7 @@ public class FileService {
 
         data.fileOverrrideWrite(filename, createContentString(newLines));
     }
-    
+
     
     
     public void writeAppend(String filename, String content) {
@@ -342,7 +363,38 @@ public class FileService {
     public void writeOverride(String filename, String content) {
         FileData data = new FileData();
         data.fileOverrrideWrite(filename, content);
+    }   
+
+
+
+    public String generateId(String idColumn, String filename, String prefix) {
+        List<String> allLines = retrieveAllLine(filename);
+        List<String> header = dbHeaderSearch(filename);
+        int idIndex = header.indexOf(idColumn);
+
+        if (idIndex == -1) {
+            throw new IllegalArgumentException("ID column not found: " + idColumn);
+        }
+
+        int maxNumber = 0;
+
+        for (String line : allLines) {
+            List<String> cols = parseLine(line);
+            if (cols.size() <= idIndex) continue;
+            String id = cols.get(idIndex);
+            if (id.startsWith(prefix)) {
+                String numberPart = id.substring(prefix.length());
+                try {
+                    int num = Integer.parseInt(numberPart);
+                    if (num > maxNumber) maxNumber = num;
+                } catch (NumberFormatException e) {
+
+                }
+            }
+        }
+
+        int newNumber = maxNumber + 1;
+        String formattedNumber = String.format("%03d", newNumber);
+        return prefix + formattedNumber;
     }
-    
-    //TODO add string match
 }

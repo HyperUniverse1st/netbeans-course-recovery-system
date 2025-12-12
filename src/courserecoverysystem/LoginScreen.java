@@ -44,7 +44,6 @@ public class LoginScreen {
     }
     
     public static void logout() {
-        User.setCurrentUser(null);
         if (sidebar != null) {
             mainFrame.getContentPane().remove(sidebar);
             sidebar = null;

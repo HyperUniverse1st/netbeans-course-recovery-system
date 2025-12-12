@@ -23,7 +23,7 @@ public class AuthService {
     //TODO we really need to figure out the columns
     private Map<String, String> userMap = new HashMap<>();
     private String userFile = "user";
-    final private String usernameColumn = "username";
+    final private String usernameColumn = "email";
     final private String passwordColumn = "password";
     private User currentUser;  //TODO you think we need this?
 

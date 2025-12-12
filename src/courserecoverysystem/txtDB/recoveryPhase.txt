@@ -1,4 +1,8 @@
-P001|EN001|Phase 1|Attend 3 remedial lab sessions
-P002|EN001|Phase 2|Submit extra assignment by 20 Dec
-P003|EN001|Final|Sit for reassessment test on 10 Jan
-P004|EN002|Phase 1|Study revision notes provided by lecturer
+P001|E001|Week1-3|Study Material
+P002|E001|Week4|Exam
+P003|E002|Week1-3|Study Material
+P004|E003|Week1-3|Study Material
+P005|E003|Week4|Exam
+P006|E004|Week1-3|Study Material
+P007|E005|Week1-3|Study Material
+P008|E005|Week4|Exam

@@ -3,26 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package courserecoverysystem.view.student;
-import courserecoverysystem.data.FileData;
 import courserecoverysystem.service.FileService;
-import courserecoverysystem.model.Student;
 import courserecoverysystem.model.User;
-import courserecoverysystem.service.StudentService;
+import courserecoverysystem.uiElements.TableUtils;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class StudentSchedule extends javax.swing.JPanel {
-    private final FileData fileData = new FileData();
     private final FileService fileService = new FileService();
     private String studentId;
-    private DefaultTableModel tableModel;
+    private final DefaultTableModel tableModel;
     
     public StudentSchedule() {
-        initComponents();
+        initComponents();        
         tableModel = (DefaultTableModel) scheduleTable.getModel();
-        System.out.println("StudentSchedule() default constructor.");
+        
         this.addComponentListener(new java.awt.event.ComponentAdapter(){
             @Override
             public void componentShown(java.awt.event.ComponentEvent e){
@@ -40,35 +36,13 @@ public class StudentSchedule extends javax.swing.JPanel {
             return;
         }
         
-        String loginUserId = currentUser.getUID();
-        System.out.println("Current login user ID: " + loginUserId);
+        List<String> lines = fileService.retrieveAllLine("class");
         
-        StudentService studentService = new StudentService();        
-        String foundStudentId = null;
-        
-        for (Student s : studentService.getAllStudents()) {
-            if (s.getUserID().equals(loginUserId)) {
-                foundStudentId = s.getStudentID();
-                break;
-            }
-        }
+        for (String line : lines) {
+            if (line.trim().isEmpty()) continue;
 
-        if (foundStudentId == null) {
-            System.out.println("No student record found for userID = " + loginUserId);
-            return;
-        }
-
-        this.studentId = foundStudentId;
-        System.out.println("Loading schedule for student: " + this.studentId);
-
-        List<String> lines = fileData.fileRead("class");
-        System.out.println("Total class lines: " + lines.size());
-        
-        for(String line : lines){
-            if(line.trim().isEmpty()) continue;
-            
             List<String> values = fileService.parseLine(line);
-            if(values.size() < 6) continue;
+            if (values.size() < 6) continue;
             
             String classId = values.get(0).trim();
             String courseName = values.get(1).trim();
@@ -77,6 +51,7 @@ public class StudentSchedule extends javax.swing.JPanel {
             String time = values.get(4).trim();
             String studentList = values.get(5).trim();
             
+            studentId = studentList;
             boolean belongsToStudent = false;
             for(String id : studentList.split(",")){
                 if(id.trim().equals(studentId)){
@@ -93,6 +68,7 @@ public class StudentSchedule extends javax.swing.JPanel {
             
             tableModel.addRow(new Object[]{classId, courseId, courseName, lecturerName, date, time});
         }
+        TableUtils.centerAllColumns(scheduleTable);
     }
     
     private String getCourseIdByCourseName(String courseName){
@@ -103,11 +79,12 @@ public class StudentSchedule extends javax.swing.JPanel {
             
             List<String> values = fileService.parseLine(line);
             if(values.size() < 3) continue;
-            String courseIdFromFile = values.get(0).trim();
+             
+            String courseId = values.get(0).trim();
             String courseNameFromFile = values.get(2).trim();
             
-            if(courseNameFromFile.equalsIgnoreCase(courseName.trim())){
-                return courseIdFromFile;
+            if(courseNameFromFile.equalsIgnoreCase(courseName) || courseNameFromFile.toLowerCase().contains(courseName.toLowerCase()) || courseName.toLowerCase().contains(courseNameFromFile.toLowerCase())){
+                return courseId;
             }
         }
         return "-"; //if not found
@@ -144,10 +121,7 @@ public class StudentSchedule extends javax.swing.JPanel {
 
         scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Class ID", "Course ID", "Course Name", "Lecturer Name", "Date", "Time"
