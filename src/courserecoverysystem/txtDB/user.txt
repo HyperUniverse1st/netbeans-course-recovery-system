@@ -30,7 +30,7 @@ U00029|flores@university.edu|flores@123|lecturer
 U00030|gonzalez@university.edu|gonzalez@123|lecturer
 U00031|harris@university.edu|harris@123|lecturer
 U00032|irving@university.edu|irving@123|lecturer
-U00033|fionasmith@university.edu|a|student
+U00033|fionasmith@university.edu|fionasmith@123|student
 U00034|georgewilson@university.edu|georgewilson@123|student
 U00035|ivanwilson@university.edu|ivanwilson@123|student
 U00036|ivanchen@university.edu|ivanchen@123|student

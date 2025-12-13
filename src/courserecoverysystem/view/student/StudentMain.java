@@ -15,7 +15,6 @@ public class StudentMain extends javax.swing.JPanel {
     private final FileService fileService = new FileService();
     private final StudentService studentService = new StudentService();
     private final DefaultTableModel tableModel;
-    private String studentId;
     
     public StudentMain() {
         // lblName for the welcome !! DONT FORGET THIS
